@@ -1,225 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeVerse - Seu Portal de Animes</title>
+    <title>Arte Realista | Blog de Desenho</title>
     <style>
-        /* Estilos Gerais */
+        /* Estilos Globais */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #0f0f13;
-            color: #ffffff;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
         }
 
         /* Cabeçalho */
         header {
-            background-color: #1a1a24;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #e50914;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e50914;
-            text-decoration: none;
-        }
-
-        .logo span {
+            background-color: #1a1a1a;
             color: #fff;
+            padding: 2rem 1rem;
+            text-align: center;
         }
 
-        nav a {
-            color: #ccc;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: 0.3s;
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        nav a:hover {
-            color: #e50914;
-        }
-
-        /* Container Principal */
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        /* Player Destaque */
-        .player-section {
-            background-color: #1a1a24;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .player-section h2 {
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Proporção 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 6px;
-            background-color: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Seção do Catálogo */
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #e50914;
-            padding-left: 10px;
-        }
-
-        .anime-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .anime-card {
-            background-color: #1a1a24;
-            border-radius: 6px;
-            overflow: hidden;
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .anime-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .anime-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .anime-info {
-            padding: 10px;
-        }
-
-        .anime-info h3 {
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .anime-info p {
-            font-size: 12px;
+        header p {
             color: #aaa;
-            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+
+        /* Layout Principal */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Card do Post */
+        article.post {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .post h2 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .post .data {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+
+        .post h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .post p, .post ul {
+            margin-bottom: 1rem;
+        }
+
+        .post ul {
+            margin-left: 1.5rem;
         }
 
         /* Rodapé */
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #1a1a24;
-            margin-top: 40px;
-            color: #777;
-            font-size: 14px;
+            padding: 1.5rem;
+            background-color: #1a1a1a;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 3rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">Anime<span>Verse</span></a>
-        <nav>
-            <a href="#">Início</a>
-            <a href="#">Animes PT-BR</a>
-            <a href="#">Lançamentos</a>
-            <a href="#">Categorias</a>
-        </nav>
+        <h1>Arte & Realismo</h1>
+        <p>Dicas, técnicas e segredos para dominar o desenho realista</p>
     </header>
 
-    <div class="container">
+    <main class="container">
+        
+        <article class="post">
+            <h2>Como Começar no Desenho Realista: Guia para Iniciantes</h2>
+            <p class="data">Publicado em 13 de Agosto de 2026</p>
 
-        <section class="player-section">
-            <h2>Assistindo: Anime Destaque - Episódio 01 (PT-BR)</h2>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-            </div>
-        </section>
+            <p>O desenho realista não é um dom misterioso, mas sim o resultado de observação, paciência e treino constante. Se você quer transformar seus rabiscos em arte impressionante, confira os passos fundamentais abaixo!</p>
 
-        <h2 class="section-title">Episódios Recentes em Português</h2>
-        <div class="anime-grid">
+            <h3>1. Materiais Básicos</h3>
+            <p>Você não precisa gastar muito no começo. O essencial é ter:</p>
+            <ul>
+                <li>Lápis de diferentes graduações (HB, 2B, 4B e 6B).</li>
+                <li>Borracha limpa-tipos (ótima para criar destaques de luz).</li>
+                <li>Papel com gramatura mais alta (a partir de 180g/m²).</li>
+                <li>Esfuminho ou pincel macio para degradês suaves.</li>
+            </ul>
 
-            <div class="anime-card">
-                <img src="https://via.placeholder.com/200x300?text=Anime+1" alt="Capa do Anime">
-                <div class="anime-info">
-                    <h3>Nome do Anime 1</h3>
-                    <p>Episódio 12 • Dublado</p>
-                </div>
-            </div>
+            <h3>2. Aprenda a Mapear Valores (Luz e Sombra)</h3>
+            <p>O realismo vem do contraste. Treine criar uma escala de cinza, do branco do papel até o preto mais escuro que seu lápis 6B consegue fazer. Dominar a transição suave entre o claro e o escuro é a chave para dar volume aos seus desenhos.</p>
 
-            <div class="anime-card">
-                <img src="https://via.placeholder.com/200x300?text=Anime+2" alt="Capa do Anime">
-                <div class="anime-info">
-                    <h3>Nome do Anime 2</h3>
-                    <p>Episódio 01 • Legendado</p>
-                </div>
-            </div>
+            <h3>3. Desenhe o que Você Vê, Não o que Acha que Vê</h3>
+            <p>O maior erro de quem está começando é desenhar símbolos da mente em vez de formas reais. Olhe para a foto de referência com atenção: observe as formas geométricas, os ângulos e como a luz rebate nos objetos.</p>
+        </article>
 
-            <div class="anime-card">
-                <img src="https://via.placeholder.com/200x300?text=Anime+3" alt="Capa do Anime">
-                <div class="anime-info">
-                    <h3>Nome do Anime 3</h3>
-                    <p>Episódio 24 • Dublado</p>
-                </div>
-            </div>
-
-            <div class="anime-card">
-                <img src="https://via.placeholder.com/200x300?text=Anime+4" alt="Capa do Anime">
-                <div class="anime-info">
-                    <h3>Nome do Anime 4</h3>
-                    <p>Episódio 05 • Legendado</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    </main>
 
     <footer>
-        <p>&copy; 2026 AnimeVerse - Todos os direitos reservados.</p>
+        <p>&copy; 2026 Blog de Desenho Realista. Todos os direitos reservados.</p>
     </footer>
 
 </body>
