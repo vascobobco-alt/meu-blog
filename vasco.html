@@ -9,289 +9,217 @@
     
 </body>
 </html>
-device-width
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoVida - Blog de Natureza</title>
+    <title>AnimeVerse - Seu Portal de Animes</title>
     <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;            margin: 0;                       margin: 0;            margin: 0;                      margin: 0;
-           margin: 0;
+        /* Estilos Gerais */
+        * {
+            box-sizing: border-box;
             margin: 0;
-  margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-
-            padding: 0;
-            padding: 0;
-            padding: 0;
-            padding: 0;
-            padding: 0;
-            padding: 0;
-            background-color: #f4f8f5;
-            color: #2d3748;
+        body {
+            background-color: #0f0f13;
+            color: #ffffff;
         }
 
         /* Cabeçalho */
         header {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
+            background-color: #1a1a24;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e50914;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e50914;
+            text-decoration: none;
         }
 
-        header p {
-            margin-top: 0.5rem;
-            font-style: italic;
-            opacity: 0.9;
-        }<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoVida - Blog de Natureza</title>
-    <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f8f5;
-            color: #2d3748;
-        }
-
-        /* Cabeçalho */
-        header {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        header p {
-            margin-top: 0.5rem;
-            font-style: italic;
-            opacity: 0.9;
-        }
-
-        /* Navegação */
-        nav {
-            background-color: #1b5e20;
-            text-align: center;
-            padding: 0.8rem;
+        .logo span {
+            color: #fff;
         }
 
         nav a {
-            color: white;
+            color: #ccc;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+            margin-left: 20px;
+            transition: 0.3s;
         }
 
         nav a:hover {
-            color: #a5d6a7;
+            color: #e50914;
         }
 
-        /* Conteúdo Principal */
+        /* Container Principal */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
 
-        /* Posts */
-        article {
-            background: white;
+        /* Player Destaque */
+        .player-section {
+            background-color: #1a1a24;
             padding: 20px;
-            margin-bottom: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
-        article h2 {
-            color: #2e7d32;
-            margin-top: 0;
-        }
-
-        .data {
-            font-size: 0.85rem;
-            color: #666;
+        .player-section h2 {
             margin-bottom: 15px;
+            color: #fff;
         }
 
-        article img {
-            width: 100%;
-            height: auto;
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
             border-radius: 6px;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Seção do Catálogo */
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e50914;
+            padding-left: 10px;
+        }
+
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .anime-card {
+            background-color: #1a1a24;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .anime-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .anime-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .anime-info {
+            padding: 10px;
+        }
+
+        .anime-info h3 {
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .anime-info p {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 4px;
         }
 
         /* Rodapé */
         footer {
-            background-color: #2e7d32;
-            color: white;
             text-align: center;
-            padding: 1rem;
-            margin-top: 40px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-
-        <article>
-            <h2>A Importância das Florestas Tropicais</h2>
-            <div cl
-
-    <header>
-        <h1>EcoVida</h1>
-        <p>Conectando você com a beleza do mundo natural</p>
-    </header>
-
-    <nav>
-        <a href="#">Início</a>
-        <a href="#">Florestas</a>
-        <a href="#">Fauna</a>
-        <a href="#">Sobre</a>
-    </nav>
-
-    <div class="container">
-
-        <article>
-            <h2>A Importância das Florestas Tropicais</h2>
-            <div class="data">Publicado em 12 de Outubro de 2026</div>
-            <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" alt="Floresta tropical verdejante">
-            <p>As florestas tropicais são os pulmões do nosso planeta. Elas abrigam mais da metade das espécies terrestres de plantas e animais do mundo, além de desempenharem um papel vital na regulação do clima global.</p>
-            <p>Preservar esses ecossistemas não é apenas proteger as árvores, mas garantir o futuro das próximas gerações...</p>
-        </article>
-
-        <article>
-            <h2>Como Começar um Jardim Sustentável em Casa</h2>
-            <div class="data">Publicado em 05 de Outubro de 2026</div>
-            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" alt="Planta pequena crescendo em vaso">
-            <p>Você não precisa de um grande quintal para cultivar um pedaço de natureza. Com alguns vasos pequenos, terra fértil e luz solar, é possível criar um refúgio verde na sua varanda ou janela.</p>
-            <p>Aproveite restos orgânicos para fazer adubo natural e opte por plantas nativas da sua região!</p>
-        </article>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 EcoVida Blog - Todos os direitos reservados.</p>
-    </footer>
-
-</body>
-</html>
-
-        /* Navegação */
-        nav {
-            background-color: #1b5e20;
-            text-align: center;
-            padding: 0.8rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: #a5d6a7;
-        }
-
-        /* Conteúdo Principal */
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        /* Posts */
-        article {
-            background: white;
             padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        article h2 {
-            color: #2e7d32;
-            margin-top: 0;
-        }
-
-        .data {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        article img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 1rem;
+            background-color: #1a1a24;
             margin-top: 40px;
+            color: #777;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>EcoVida</h1>
-        <p>Conectando você com a beleza do mundo natural</p>
+        <a href="#" class="logo">Anime<span>Verse</span></a>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Animes PT-BR</a>
+            <a href="#">Lançamentos</a>
+            <a href="#">Categorias</a>
+        </nav>
     </header>
-
-    <nav>
-        <a href="#">Início</a>
-        <a href="#">Florestas</a>
-        <a href="#">Fauna</a>
-        <a href="#">Sobre</a>
-    </nav>
 
     <div class="container">
 
-        <article>
-            <h2>A Importância das Florestas Tropicais</h2>
-            <div class="data">Publicado em 12 de Outubro de 2026</div>
-            <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" alt="Floresta tropical verdejante">
-            <p>As florestas tropicais são os pulmões do nosso planeta. Elas abrigam mais da metade das espécies terrestres de plantas e animais do mundo, além de desempenharem um papel vital na regulação do clima global.</p>
-            <p>Preservar esses ecossistemas não é apenas proteger as árvores, mas garantir o futuro das próximas gerações...</p>
-        </article>
+        <section class="player-section">
+            <h2>Assistindo: Anime Destaque - Episódio 01 (PT-BR)</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+        </section>
 
-        <article>
-            <h2>Como Começar um Jardim Sustentável em Casa</h2>
-            <div class="data">Publicado em 05 de Outubro de 2026</div>
-            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" alt="Planta pequena crescendo em vaso">
-            <p>Você não precisa de um grande quintal para cultivar um pedaço de natureza. Com alguns vasos pequenos, terra fértil e luz solar, é possível criar um refúgio verde na sua varanda ou janela.</p>
-            <p>Aproveite restos orgânicos para fazer adubo natural e opte por plantas nativas da sua região!</p>
-        </article>
+        <h2 class="section-title">Episódios Recentes em Português</h2>
+        <div class="anime-grid">
 
+            <div class="anime-card">
+                <img src="https://via.placeholder.com/200x300?text=Anime+1" alt="Capa do Anime">
+                <div class="anime-info">
+                    <h3>Nome do Anime 1</h3>
+                    <p>Episódio 12 • Dublado</p>
+                </div>
+            </div>
+
+            <div class="anime-card">
+                <img src="https://via.placeholder.com/200x300?text=Anime+2" alt="Capa do Anime">
+                <div class="anime-info">
+                    <h3>Nome do Anime 2</h3>
+                    <p>Episódio 01 • Legendado</p>
+                </div>
+            </div>
+
+            <div class="anime-card">
+                <img src="https://via.placeholder.com/200x300?text=Anime+3" alt="Capa do Anime">
+                <div class="anime-info">
+                    <h3>Nome do Anime 3</h3>
+                    <p>Episódio 24 • Dublado</p>
+                </div>
+            </div>
+
+            <div class="anime-card">
+                <img src="https://via.placeholder.com/200x300?text=Anime+4" alt="Capa do Anime">
+                <div class="anime-info">
+                    <h3>Nome do Anime 4</h3>
+                    <p>Episódio 05 • Legendado</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 EcoVida Blog - Todos os direitos reservados.</p>
+        <p>&copy; 2026 AnimeVerse - Todos os direitos reservados.</p>
     </footer>
 
 </body>
