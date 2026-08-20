@@ -1,32 +1,183 @@
-  <main class="container">
-        
-        <article class="post">
-            <h2>Como Começar no Desenho Realista: Guia para Iniciantes</h2>
-            <p class="data">Publicado em 13 de Agosto de 2026</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Sports - O Blog dos Carros Esportivos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-            <p>O desenho realista não é um dom misterioso, mas sim o resultado de observação, paciência e treino constante. Se você quer transformar seus rabiscos em arte impressionante, confira os passos fundamentais abaixo!</p>
+        body {
+            background-color: #0f0f12;
+            color: #ffffff;
+        }
 
-            <h3>1. Materiais Básicos</h3>
-            <p>Você não precisa gastar muito no começo. O essencial é ter:</p>
-            <ul>
-                <li>Lápis de diferentes graduações (HB, 2B, 4B e 6B).</li>
-                <li>Borracha limpa-tipos (ótima para criar destaques de luz).</li>
-                <li>Papel com gramatura mais alta (a partir de 180g/m²).</li>
-                <li>Esfuminho ou pincel macio para degradês suaves.</li>
-            </ul>
+        header {
+            background-color: #1a1a24;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #ff3333;
+        }
 
-            <h3>2. Aprenda a Mapear Valores (Luz e Sombra)</h3>
-            <p>O realismo vem do contraste. Treine criar uma escala de cinza, do branco do papel até o preto mais escuro que seu lápis 6B consegue fazer. Dominar a transição suave entre o claro e o escuro é a chave para dar volume aos seus desenhos.</p>
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff3333;
+            letter-spacing: 2px;
+        }
 
-            <h3>3. Desenhe o que Você Vê, Não o que Acha que Vê</h3>
-            <p>O maior erro de quem está começando é desenhar símbolos da mente em vez de formas reais. Olhe para a foto de referência com atenção: observe as formas geométricas, os ângulos e como a luz rebate nos objetos.</p>
-        </article>
+        header p {
+            color: #a0a0b0;
+            margin-top: 0.5rem;
+        }
 
+        .search-container {
+            max-width: 1200px;
+            margin: 2rem auto 1rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .search-container input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            border: 1px solid #333;
+            background-color: #1a1a24;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-container input:focus {
+            border-color: #ff3333;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .card {
+            background-color: #1a1a24;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a38;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff3333;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 160px;
+            background-color: #2a2a38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff3333;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #8a8a9e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #1a1a24;
+            margin-top: 3rem;
+            color: #6a6a7e;
+            border-top: 1px solid #2a2a38;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>GARAGE SPORTS</h1>
+        <p>A Enciclopédia dos 160 Melhores Carros Esportivos do Mundo</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Pesquisar entre os 160 carros..." onkeyup="filterCars()">
+    </div>
+
+    <main class="grid-container" id="carGrid">
+        <!-- Os 160 carros serão gerados automaticamente via JS -->
     </main>
 
     <footer>
-        <p>&copy; 2026 Blog de Desenho Realista. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Garage Sports Blog - Todos os direitos reservados.</p>
     </footer>
 
+    <script>
+        // Lista base de modelos de carros para geração dos 160 itens
+        const modelos = [
+            "Porsche 911 GT3", "Ferrari F40", "Lamborghini Aventador", "McLaren 720S",
+            "Bugatti Chiron", "Nissan GT-R", "Chevrolet Corvette Z06", "Ford GT",
+            "Audi R8 V10", "BMW M4 Competition", "Mercedes-AMG GT", "Aston Martin Vantage",
+            "Toyota Supra", "Subaru WRX STI", "Lexus LFA", "Dodge Viper ACR"
+        ];
+
+        const carGrid = document.getElementById("carGrid");
+
+        // Loop para gerar os 160 carros dinamicamente
+        for (let i = 1; i <= 160; i++) {
+            const modeloBase = modelos[(i - 1) % modelos.length];
+            const nomeCarro = `${modeloBase} #` + String(i).padStart(3, '0');
+
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                <div class="card-img">🏎️ ${modeloBase.split(" ")[0]}</div>
+                <div class="card-content">
+                    <h3 class="card-title">${nomeCarro}</h3>
+                    <p class="card-desc">Especificações de alta performance, motorização de ponta e aerodinâmica avançada.</p>
+                </div>
+            `;
+            carGrid.appendChild(card);
+        }
+
+        // Função para filtrar a busca em tempo real
+        function filterCars() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('.card-title').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
