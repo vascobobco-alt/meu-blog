@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPM Blog - Catalogo de Esportivos</title>
+    <title>RPM Blog - Esportivos e Clássicos</title>
     <style>
         * {
             margin: 0;
@@ -59,7 +59,7 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             justify-content: center;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -155,9 +155,9 @@
 <body>
 
     <header>
-        <div class="logo">RPM Blog - Esportivos</div>
+        <div class="logo">RPM Blog - Esportivos e Clássicos</div>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Buscar modelo ou marca..." onkeyup="filterCars()">
+            <input type="text" id="searchInput" placeholder="Buscar modelo (ex: Chevette, Gol GTi, Ferrari)..." onkeyup="filterCars()">
         </div>
         <div class="brand-filters" id="brandFilters">
             <button class="filter-btn active" onclick="selectBrand('todas')">Todas</button>
@@ -175,29 +175,25 @@
 
     <script>
         const marcas = [
-            { marca: "Ferrari", modelos: ["488 GTB", "F8 Tributo", "SF90 Stradale", "LaFerrari", "812 Superfast", "Roma", "Portofino", "Enzo", "F40", "F50", "250 GTO", "Daytona SP3"] },
-            { marca: "Porsche", modelos: ["911 GT3 RS", "911 Turbo S", "718 Cayman GT4", "918 Spyder", "911 Carrera S", "911 GT2 RS", "Taycan Turbo S", "Carrera GT", "959", "718 Boxster Spyder"] },
-            { marca: "Lamborghini", modelos: ["Aventador SVJ", "Huracán EVO", "Revuelto", "Sian", "Countach LPI 800-4", "Gallardo", "Murciélago", "Veneno", "Centenario", "Diablo", "Urus Performante"] },
-            { marca: "McLaren", modelos: ["720S", "765LT", "P1", "Senna", "Artura", "GT", "Speedtail", "650S", "570S", "F1", "Elva", "750S"] },
-            { marca: "Aston Martin", modelos: ["Vantage", "DB11", "DBS Superleggera", "Valkyrie", "Valhalla", "One-77", "DB5", "V12 Vantage", "DBX707"] },
-            { marca: "Bugatti", modelos: ["Veyron", "Chiron", "Divo", "Centodieci", "Bolide", "Mistral", "EB110"] },
-            { marca: "Chevrolet", modelos: ["Corvette C8 Stingray", "Corvette Z06", "Corvette ZR1", "Camaro ZL1", "Camaro SS"] },
-            { marca: "Ford", modelos: ["GT", "Mustang Shelby GT500", "Mustang Dark Horse", "Mustang Mach 1"] },
+            { marca: "Chevrolet", modelos: ["Chevette Hatch", "Chevette Tubarão", "Chevette DL", "Opala SS", "Opala Comodoro", "Caravan SS", "Kadett GS", "Kadett GSi", "Corsa GSi", "Astra GSi", "Omega CD 4.1", "Corvette C8", "Camaro ZL1"] },
+            { marca: "Volkswagen", modelos: ["Gol GTi 2.0", "Gol GTS", "Gol Rallye", "Passat GTS Pointer", "SP2", "Fusca Itamar", "Golf GTI", "Golf R", "Karmann Ghia", "Santana Executivo", "Polo GTS", "Jetta GLI"] },
+            { marca: "Fiat", modelos: ["Uno Turbo IE", "Uno 1.5R", "Marea Turbo", "Fiat Coupé 20V", "Tempra Turbo", "Pulse Abarth", "Fastback Abarth", "147 Rallye", "Bravo T-Jet"] },
+            { marca: "Ford", modelos: ["Escort XR3", "Escort RS Cosworth", "Maverick GT", "Corcel GT", "Focus RS", "Mustang Shelby GT500", "Mustang Dark Horse", "Ford GT"] },
+            { marca: "Ferrari", modelos: ["488 GTB", "F8 Tributo", "SF90 Stradale", "LaFerrari", "812 Superfast", "Roma", "Enzo", "F40", "F50", "250 GTO"] },
+            { marca: "Porsche", modelos: ["911 GT3 RS", "911 Turbo S", "718 Cayman GT4", "918 Spyder", "911 Carrera S", "911 GT2 RS", "Taycan Turbo S", "Carrera GT"] },
+            { marca: "Lamborghini", modelos: ["Aventador SVJ", "Huracán EVO", "Revuelto", "Sian", "Countach LPI 800-4", "Gallardo", "Murciélago", "Veneno"] },
             { marca: "Nissan", modelos: ["GT-R Nismo", "GT-R R35", "Skyline GT-R R34", "Skyline GT-R R33", "Skyline GT-R R32", "370Z", "Z Nismo", "300ZX"] },
             { marca: "Toyota", modelos: ["GR Supra", "GR Yaris", "GR86", "Supra MK4 (A80)", "2000GT", "Celica GT-Four"] },
-            { marca: "BMW", modelos: ["M3 Competition", "M4 CSL", "M2 CS", "M5 CS", "M8 Competition", "Z4 M40i", "i8", "M1"] },
+            { marca: "BMW", modelos: ["M3 Competition", "M4 CSL", "M2 CS", "M5 CS", "M8 Competition", "Z4 M40i", "i8"] },
             { marca: "Mercedes-AMG", modelos: ["AMG GT Black Series", "AMG One", "AMG GT 63 S", "SL 63", "C 63 AMG S", "CLK GTR"] },
-            { marca: "Audi", modelos: ["R8 V10 Performance", "RS6 Avant", "RS7 Sportback", "RS e-tron GT", "TT RS", "Quattro"] },
-            { marca: "Koenigsegg", modelos: ["Jesko", "Regera", "Gemera", "Agera RS", "CC850", "One:1"] },
-            { marca: "Pagani", modelos: ["Zonda R", "Huayra Roadster", "Utopia", "Huayra BC"] }
+            { marca: "Audi", modelos: ["R8 V10 Performance", "RS6 Avant", "RS7 Sportback", "RS e-tron GT", "TT RS", "Quattro"] }
         ];
 
         let allCars = [];
         let selectedBrand = 'todas';
 
-        // Preenche a lista com mais de 100 carros
+        // Processa as marcas e modelos
         marcas.forEach(item => {
-            // Cria botões de filtro
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
             btn.innerText = item.marca;
@@ -209,7 +205,7 @@
                 allCars.push({
                     nome: `${item.marca} ${modelo}`,
                     categoria: item.marca,
-                    img: `https://source.unsplash.com/600x400/?${queryName},sports-car`
+                    img: `https://source.unsplash.com/600x400/?${queryName},car`
                 });
             });
         });
@@ -219,7 +215,7 @@
             const count = document.getElementById('carCount');
             
             grid.innerHTML = '';
-            count.innerText = `Exibindo ${cars.length} de ${allCars.length} carros esportivos`;
+            count.innerText = `Exibindo ${cars.length} de ${allCars.length} carros no catálogo`;
 
             cars.forEach(car => {
                 const card = document.createElement('div');
@@ -238,7 +234,6 @@
         function selectBrand(marca) {
             selectedBrand = marca;
             
-            // Atualiza o estado dos botões
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
                 btn.classList.toggle('active', btn.innerText.toLowerCase() === marca.toLowerCase() || (marca === 'todas' && btn.innerText === 'Todas'));
@@ -257,7 +252,6 @@
             displayCars(filtered);
         }
 
-        // Inicializa a exibição
         displayCars(allCars);
     </script>
 
