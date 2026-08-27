@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPM Blog - Carros Esportivos</title>
+    <title>RPM Blog - 100+ Carros Esportivos</title>
     <style>
         * {
             margin: 0;
@@ -32,114 +32,86 @@
         header {
             background-color: #1a1a1a;
             border-bottom: 3px solid #ff0000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 1.5rem 2rem;
+            text-align: center;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #ff0000;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin-bottom: 1rem;
         }
 
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        nav a:hover {
-            color: #ff0000;
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #ff0000;
         }
 
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
+        }
+
+        .stats {
+            margin-bottom: 1.5rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .grid-cars {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
 
-        .card {
+        .car-card {
             background-color: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 2rem;
             border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.2rem;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
+        .car-card:hover {
+            transform: translateY(-4px);
+            border-color: #ff0000;
         }
 
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .tag {
+        .car-category {
             background-color: #ff0000;
-            color: white;
-            padding: 0.2rem 0.6rem;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
             border-radius: 4px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .car-title {
+            font-size: 1.1rem;
             font-weight: bold;
-        }
-
-        .card h2 {
-            margin: 0.8rem 0;
-            font-size: 1.5rem;
-        }
-
-        .card p {
-            color: #ccc;
-            margin-bottom: 1rem;
-        }
-
-        .read-more {
-            color: #ff0000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        aside {
-            background-color: #1e1e1e;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #333;
-            height: fit-content;
-        }
-
-        aside h3 {
-            border-bottom: 2px solid #ff0000;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        aside ul {
-            list-style: none;
-        }
-
-        aside li {
-            margin-bottom: 0.8rem;
-        }
-
-        aside a {
-            color: #ccc;
-            text-decoration: none;
-        }
-
-        aside a:hover {
-            color: #ff0000;
+            margin-bottom: 0.3rem;
         }
 
         footer {
@@ -155,51 +127,82 @@
 <body>
 
     <header>
-        <div class="logo">RPM Blog</div>
-        <nav>
-            <a href="#">Início</a>
-            <a href="#">Supercarros</a>
-            <a href="#">Testes</a>
-            <a href="#">Contato</a>
-        </nav>
+        <div class="logo">RPM Blog - Catálogo</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar entre os 100+ carros..." onkeyup="filterCars()">
+        </div>
     </header>
 
     <div class="container">
-        <main>
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Carro esportivo vermelho">
-                <div class="card-content">
-                    <span class="tag">Supercarro</span>
-                    <h2>O Poder dos Motores V8 na Era Moderna</h2>
-                    <p>Analisamos como a tecnologia atual consegue extrair o máximo de desempenho dos motores V8 mantendo a eficiência necessária para as pistas modernas.</p>
-                    <a href="#" class="read-more">Leia mais &rarr;</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1000&q=80" alt="Carro esportivo acelerando">
-                <div class="card-content">
-                    <span class="tag">Tecnologia</span>
-                    <h2>A Era dos Hipercarros Elétricos</h2>
-                    <p>Como a aceleração instantânea dos motores elétricos redefiniu os limites do que consideramos um carro esportivo de alta performance.</p>
-                    <a href="#" class="read-more">Leia mais &rarr;</a>
-                </div>
-            </article>
-        </main>
-
-        <aside>
-            <h3>Mais Lidos</h3>
-            <ul>
-                <li><a href="#"> Top 5 carros mais rápidos de 2026</a></li>
-                <li><a href="#"> Guia de manutenção para carros turbo</a></li>
-                <li><a href="#"> Histórico de pistas lendárias</a></li>
-            </ul>
-        </aside>
+        <div class="stats" id="carCount">Exibindo carros...</div>
+        <div class="grid-cars" id="carGrid"></div>
     </div>
 
     <footer>
-        <p>&copy; 2026 RPM Blog - Todos os direitos reservados.</p>
+        <p>&copy; 2026 RPM Blog - Guia Completo de Esportivos</p>
     </footer>
+
+    <script>
+        const marcas = [
+            { marca: "Ferrari", modelos: ["488 GTB", "F8 Tributo", "SF90 Stradale", "LaFerrari", "812 Superfast", "Roma", "Portofino", "Enzo", "F40", "F50", "250 GTO", "Daytona SP3"] },
+            { marca: "Porsche", modelos: ["911 GT3 RS", "911 Turbo S", "718 Cayman GT4", "918 Spyder", "911 Carrera S", "911 GT2 RS", "Taycan Turbo S", "Carrera GT", "959", "718 Boxster Spyder"] },
+            { marca: "Lamborghini", modelos: ["Aventador SVJ", "Huracán EVO", "Revuelto", "Sian", "Countach LPI 800-4", "Gallardo", "Murciélago", "Veneno", "Centenario", "Diablo", "Urus Performante"] },
+            { marca: "McLaren", modelos: ["720S", "765LT", "P1", "Senna", "Artura", "GT", "Speedtail", "650S", "570S", "F1", "Elva", "750S"] },
+            { marca: "Aston Martin", modelos: ["Vantage", "DB11", "DBS Superleggera", "Valkyrie", "Valhalla", "One-77", "DB5", "V12 Vantage", "DBX707"] },
+            { marca: "Bugatti", modelos: ["Veyron", "Chiron", "Divo", "Centodieci", "Bolide", "Mistral", "EB110"] },
+            { marca: "Chevrolet", modelos: ["Corvette C8 Stingray", "Corvette Z06", "Corvette ZR1", "Camaro ZL1", "Camaro SS"] },
+            { marca: "Ford", modelos: ["GT", "Mustang Shelby GT500", "Mustang Dark Horse", "Mustang Mach 1"] },
+            { marca: "Nissan", modelos: ["GT-R Nismo", "GT-R R35", "Skyline GT-R R34", "Skyline GT-R R33", "Skyline GT-R R32", "370Z", "Z Nismo", "300ZX"] },
+            { marca: "Toyota", modelos: ["GR Supra", "GR Yaris", "GR86", "Supra MK4 (A80)", "2000GT", "Celica GT-Four"] },
+            { marca: "BMW", modelos: ["M3 Competition", "M4 CSL", "M2 CS", "M5 CS", "M8 Competition", "Z4 M40i", "i8", "M1"] },
+            { marca: "Mercedes-AMG", modelos: ["AMG GT Black Series", "AMG One", "AMG GT 63 S", "SL 63", "C 63 AMG S", "CLK GTR"] },
+            { marca: "Audi", modelos: ["R8 V10 Performance", "RS6 Avant", "RS7 Sportback", "RS e-tron GT", "TT RS", "Quattro"] },
+            { marca: "Koenigsegg", modelos: ["Jesko", "Regera", "Gemera", "Agera RS", "CC850", "One:1"] },
+            { marca: "Pagani", modelos: ["Zonda R", "Huayra Roadster", "Utopia", "Huayra BC"] }
+        ];
+
+        let allCars = [];
+
+        // Preenche a lista com mais de 100 carros
+        marcas.forEach(item => {
+            item.modelos.forEach(modelo => {
+                allCars.push({
+                    nome: `${item.marca} ${modelo}`,
+                    categoria: item.marca
+                });
+            });
+        });
+
+        function displayCars(cars) {
+            const grid = document.getElementById('carGrid');
+            const count = document.getElementById('carCount');
+            
+            grid.innerHTML = '';
+            count.innerText = `Exibindo ${cars.length} de ${allCars.length} carros esportivos`;
+
+            cars.forEach(car => {
+                const card = document.createElement('div');
+                card.className = 'car-card';
+                card.innerHTML = `
+                    <span class="car-category">${car.categoria}</span>
+                    <div class="car-title">${car.nome}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCars() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allCars.filter(car => 
+                car.nome.toLowerCase().includes(query) || 
+                car.categoria.toLowerCase().includes(query)
+            );
+            displayCars(filtered);
+        }
+
+        // Inicializa a lista
+        displayCars(allCars);
+    </script>
 
 </body>
 </html>
