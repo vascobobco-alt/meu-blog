@@ -174,40 +174,48 @@
     </footer>
 
     <script>
-        const marcas = [
-            { marca: "Chevrolet", modelos: ["Chevette Hatch", "Chevette Tubarão", "Chevette DL", "Opala SS", "Opala Comodoro", "Caravan SS", "Kadett GS", "Kadett GSi", "Corsa GSi", "Astra GSi", "Omega CD 4.1", "Corvette C8", "Camaro ZL1"] },
-            { marca: "Volkswagen", modelos: ["Gol GTi 2.0", "Gol GTS", "Gol Rallye", "Passat GTS Pointer", "SP2", "Fusca Itamar", "Golf GTI", "Golf R", "Karmann Ghia", "Santana Executivo", "Polo GTS", "Jetta GLI"] },
-            { marca: "Fiat", modelos: ["Uno Turbo IE", "Uno 1.5R", "Marea Turbo", "Fiat Coupé 20V", "Tempra Turbo", "Pulse Abarth", "Fastback Abarth", "147 Rallye", "Bravo T-Jet"] },
-            { marca: "Ford", modelos: ["Escort XR3", "Escort RS Cosworth", "Maverick GT", "Corcel GT", "Focus RS", "Mustang Shelby GT500", "Mustang Dark Horse", "Ford GT"] },
-            { marca: "Ferrari", modelos: ["488 GTB", "F8 Tributo", "SF90 Stradale", "LaFerrari", "812 Superfast", "Roma", "Enzo", "F40", "F50", "250 GTO"] },
-            { marca: "Porsche", modelos: ["911 GT3 RS", "911 Turbo S", "718 Cayman GT4", "918 Spyder", "911 Carrera S", "911 GT2 RS", "Taycan Turbo S", "Carrera GT"] },
-            { marca: "Lamborghini", modelos: ["Aventador SVJ", "Huracán EVO", "Revuelto", "Sian", "Countach LPI 800-4", "Gallardo", "Murciélago", "Veneno"] },
-            { marca: "Nissan", modelos: ["GT-R Nismo", "GT-R R35", "Skyline GT-R R34", "Skyline GT-R R33", "Skyline GT-R R32", "370Z", "Z Nismo", "300ZX"] },
-            { marca: "Toyota", modelos: ["GR Supra", "GR Yaris", "GR86", "Supra MK4 (A80)", "2000GT", "Celica GT-Four"] },
-            { marca: "BMW", modelos: ["M3 Competition", "M4 CSL", "M2 CS", "M5 CS", "M8 Competition", "Z4 M40i", "i8"] },
-            { marca: "Mercedes-AMG", modelos: ["AMG GT Black Series", "AMG One", "AMG GT 63 S", "SL 63", "C 63 AMG S", "CLK GTR"] },
-            { marca: "Audi", modelos: ["R8 V10 Performance", "RS6 Avant", "RS7 Sportback", "RS e-tron GT", "TT RS", "Quattro"] }
+        // Mapeamento com imagens específicas para cada carro
+        const listaCarros = [
+            // Chevrolet
+            { marca: "Chevrolet", modelo: "Chevette Hatch", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&auto=format&fit=crop" },
+            { marca: "Chevrolet", modelo: "Chevette Tubarão", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&auto=format&fit=crop" },
+            { marca: "Chevrolet", modelo: "Opala SS", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&auto=format&fit=crop" },
+            { marca: "Chevrolet", modelo: "Corvette C8", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&auto=format&fit=crop" },
+            { marca: "Chevrolet", modelo: "Camaro ZL1", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=600&auto=format&fit=crop" },
+            
+            // Volkswagen
+            { marca: "Volkswagen", modelo: "Gol GTi 2.0", img: "https://images.unsplash.com/photo-1541348263662-e082662d82da?w=600&auto=format&fit=crop" },
+            { marca: "Volkswagen", modelo: "SP2", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&auto=format&fit=crop" },
+            { marca: "Volkswagen", modelo: "Golf GTI", img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&auto=format&fit=crop" },
+            
+            // Fiat
+            { marca: "Fiat", modelo: "Uno Turbo IE", img: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&auto=format&fit=crop" },
+            { marca: "Fiat", modelo: "Marea Turbo", img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&auto=format&fit=crop" },
+            
+            // Ford
+            { marca: "Ford", modelo: "Escort XR3", img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&auto=format&fit=crop" },
+            { marca: "Ford", modelo: "Maverick GT", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=600&auto=format&fit=crop" },
+            { marca: "Ford", modelo: "Mustang Shelby GT500", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=600&auto=format&fit=crop" },
+
+            // Supercarros
+            { marca: "Ferrari", modelo: "SF90 Stradale", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&auto=format&fit=crop" },
+            { marca: "Ferrari", modelo: "F40", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&auto=format&fit=crop" },
+            { marca: "Porsche", modelo: "911 GT3 RS", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&auto=format&fit=crop" },
+            { marca: "Lamborghini", modelo: "Aventador SVJ", img: "https://images.unsplash.com/photo-1519245659620-e859806a8d3b?w=600&auto=format&fit=crop" },
+            { marca: "Nissan", modelo: "Skyline GT-R R34", img: "https://images.unsplash.com/photo-1611244420853-70b2f831f0a2?w=600&auto=format&fit=crop" },
+            { marca: "Toyota", modelo: "Supra MK4", img: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&auto=format&fit=crop" }
         ];
 
-        let allCars = [];
         let selectedBrand = 'todas';
 
-        // Processa as marcas e modelos
-        marcas.forEach(item => {
+        // Cria os botões de marcas no topo dinamicamente
+        const marcasUnicas = [...new Set(listaCarros.map(c => c.marca))];
+        marcasUnicas.forEach(marca => {
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
-            btn.innerText = item.marca;
-            btn.onclick = () => selectBrand(item.marca);
+            btn.innerText = marca;
+            btn.onclick = () => selectBrand(marca);
             document.getElementById('brandFilters').appendChild(btn);
-
-            item.modelos.forEach(modelo => {
-                const queryName = encodeURIComponent(`${item.marca} ${modelo}`);
-                allCars.push({
-                    nome: `${item.marca} ${modelo}`,
-                    categoria: item.marca,
-                    img: `https://source.unsplash.com/600x400/?${queryName},car`
-                });
-            });
         });
 
         function displayCars(cars) {
@@ -215,16 +223,16 @@
             const count = document.getElementById('carCount');
             
             grid.innerHTML = '';
-            count.innerText = `Exibindo ${cars.length} de ${allCars.length} carros no catálogo`;
+            count.innerText = `Exibindo ${cars.length} de ${listaCarros.length} carros no catálogo`;
 
             cars.forEach(car => {
                 const card = document.createElement('div');
                 card.className = 'car-card';
                 card.innerHTML = `
-                    <img class="car-img" src="${car.img}" alt="${car.nome}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=600&auto=format&fit=crop';">
+                    <img class="car-img" src="${car.img}" alt="${car.marca} ${car.modelo}" loading="lazy">
                     <div class="car-content">
-                        <span class="car-category">${car.categoria}</span>
-                        <div class="car-title">${car.nome}</div>
+                        <span class="car-category">${car.marca}</span>
+                        <div class="car-title">${car.marca} ${car.modelo}</div>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -244,15 +252,16 @@
 
         function filterCars() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allCars.filter(car => {
-                const matchesSearch = car.nome.toLowerCase().includes(query) || car.categoria.toLowerCase().includes(query);
-                const matchesBrand = selectedBrand === 'todas' || car.categoria.toLowerCase() === selectedBrand.toLowerCase();
+            const filtered = listaCarros.filter(car => {
+                const nomeCompleto = `${car.marca} ${car.modelo}`.toLowerCase();
+                const matchesSearch = nomeCompleto.includes(query);
+                const matchesBrand = selectedBrand === 'todas' || car.marca.toLowerCase() === selectedBrand.toLowerCase();
                 return matchesSearch && matchesBrand;
             });
             displayCars(filtered);
         }
 
-        displayCars(allCars);
+        displayCars(listaCarros);
     </script>
 
 </body>
