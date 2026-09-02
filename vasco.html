@@ -220,46 +220,46 @@
 
     <script>
         const tiposDeCarros = [
-            { nome: "Hatchback Compacto", cat: "Urbano", tag: "hatchback", desc: "Carro pequeno de 2 a 4 portas com porta-malas integrado para fácil manobra na cidade." },
-            { nome: "Sedan Subcompacto", cat: "Urbano", tag: "sedan", desc: "Sedan de porte menor com baixo consumo e bom espaço de porta-malas." },
-            { nome: "Sedan Médio", cat: "Familiar", tag: "sedan-car", desc: "O clássico carro de três volumes com foco em conforto familiar e tecnologia." },
-            { nome: "Sedan Executivo / Grande", cat: "Luxo", tag: "luxury-sedan", desc: "Veículo amplo com acabamento nobre, alta potência e extremo conforto traseiro." },
-            { nome: "SUV Compacto", cat: "Utilitário", tag: "compact-suv", desc: "Crossover urbano com posição alta de dirigir e ótimo vão livre do solo." },
-            { nome: "SUV Médio", cat: "Utilitário", tag: "suv", desc: "SUV equilibrado com capacidade para passageiros e boa tração off-road." },
-            { nome: "SUV Full-Size (Grande)", cat: "Utilitário", tag: "large-suv", desc: "Utilitário esportivo robusto com até 3 fileiras de assentos e chassi reforçado." },
-            { nome: "SUV Coupé", cat: "Esportivo", tag: "suv-coupe", desc: "Mistura do teto caído de um coupé com a altura e postura de um SUV." },
-            { nome: "Perua / SW (Station Wagon)", cat: "Familiar", tag: "station-wagon", desc: "Carro derivado de sedan com teto estendido até a traseira e grande porta-malas." },
-            { nome: "Minivan / MPV", cat: "Familiar", tag: "minivan", desc: "Veículo focado no máximo aproveitamento de espaço interno e portas deslizantes." },
-            { nome: "Coupé de 2 Portas", cat: "Esportivo", tag: "coupe", desc: "Design aerodinâmico com teto inclinado e focado em esportividade visual." },
-            { nome: "Coupé de 4 Portas", cat: "Luxo Esportivo", tag: "sports-sedan", desc: "Perfil esportivo de teto baixo com a praticidade de quatro portas." },
-            { nome: "Conversível / Roadster", cat: "Esportivo", tag: "roadster", desc: "Carro esportivo de 2 lugares com teto retrátil de pano ou rígido." },
-            { nome: "Cabriolet", cat: "Luxo", tag: "convertible", desc: "Conversível de 4 lugares focado no passeio ao ar livre com sofisticação." },
-            { nome: "Picape Leve", cat: "Trabalho", tag: "small-truck", desc: "Picape de porte pequeno construída sobre monobloco para entregas e uso diário." },
-            { nome: "Picape Média", cat: "Trabalho/Off-Road", tag: "pickup-truck", desc: "Picape com chassi sobre chassi com forte capacidade de carga e tração 4x4." },
-            { nome: "Picape Heavy Duty (Grande)", cat: "Trabalho Pesado", tag: "truck", desc: "Gigantes a diesel com capacidade de reboque de várias toneladas." },
-            { nome: "Hipercarro", cat: "Exótico", tag: "hypercar", desc: "O ápice do desempenho automotivo com motores com mais de 1000 cv e produção limitada." },
-            { nome: "Supercarro", cat: "Esportivo", tag: "supercar", desc: "Veículo de alta performance, aerodinâmica refinada e velocidade acima de 300 km/h." },
-            { nome: "Muscle Car", cat: "Clássico/Potência", tag: "muscle-car", desc: "Carro americano tradicional com motor V8 forte, tração traseira e design agressivo." },
-            { nome: "Hot Hatch", cat: "Esportivo", tag: "hot-hatch", desc: "Hatchback com ajuste de suspensão esportivo, turbo e alta potência." },
-            { nome: "Crossover Urbano", cat: "Urbano", tag: "crossover-car", desc: "Mistura de hatch com características visuais de SUV para a cidade." },
-            { nome: "Carro Elétrico a Bateria (BEV)", cat: "Sustentável", tag: "electric-car", desc: "Movido 100% por eletricidade sem emissão de poluentes no escapamento." },
-            { nome: "Híbrido Plug-in (PHEV)", cat: "Sustentável", tag: "hybrid-car", desc: "Possui motor elétrico com recarga na tomada e motor a combustão reserva." },
-            { nome: "Híbrido Leve (MHEV)", cat: "Sustentável", tag: "modern-car", desc: "Sistema elétrico de 48V para auxiliar o motor a combustão na economia." },
-            { nome: "Carro a Célula de Hidrogênio (FCEV)", cat: "Futurista", tag: "concept-car", desc: "Gera eletricidade a partir do hidrogênio expelindo apenas água pelo escape." },
-            { nome: "Microcarro Urbano", cat: "Urbano", tag: "smart-car", desc: "Ultra compacto para até 2 pessoas focado em estacionar em pequenos espaços." },
-            { nome: "Kei Car", cat: "JDM", tag: "japan-car", desc: "Categoria japonesa de carros super compactos com limitações de tamanho e motor." },
-            { nome: "JDM (Japanese Domestic Market)", cat: "Cultura", tag: "jdm-car", desc: "Carros fabricados especificamente para o mercado esportivo japonês." },
-            { nome: "Track Tool / Carro de Pista", cat: "Corrida", tag: "race-car", desc: "Carro homologado para rua mas otimizado para dias de pista (Track Days)." },
-            { nome: "Buggy de Praia", cat: "Recreativo", tag: "buggy", desc: "Veículo leve com carroceria de fibra feito para trafegar em dunas de areia." },
-            { nome: "Carro Restomod", cat: "Custom", tag: "classic-car", desc: "Carro clássico restaurado com mecânica, freios e suspensão modernas." },
-            { nome: "Sleeper / Carro Zé Bonitinho", cat: "Custom", tag: "old-car", desc: "Carro com visual simples por fora mas com motor preparação extrema por dentro." },
-            { nome: "Off-Road Utilitário Raiz", cat: "4x4", tag: "offroad-car", desc: "Chassi reforçado, eixos rígidos e reduzida para encarar lama pesada." },
-            { nome: "SUV Off-Road Extremo", cat: "4x4", tag: "4x4-truck", desc: "SUV preparado de fábrica com bloqueios de diferencial e pneus de cravos." },
-            { nome: "Targa", cat: "Esportivo", tag: "porsche", desc: "Estilo com painel do teto removível e coluna traseira fixa de proteção." },
-            { nome: "Grand Tourer (GT)", cat: "Luxo Esportivo", tag: "gt-car", desc: "Coupé de alta velocidade projetado para viagens longas e confortáveis." },
-            { nome: "Speedster", cat: "Esportivo", desc: "Conversível radical sem para-brisa completo ou sem janelas laterais.", tag: "speedster" },
-            { nome: "Carro de Rali Homologado", cat: "Corrida", tag: "rally-car", desc: "Versão de rua criada para permitir a participação do modelo em campeonatos de rali." },
-            { nome: "Shooting Brake", cat: "Luxo", tag: "exotic-car", desc: "Fusão elegante de coupé de 2 ou 4 portas com traseira de perua." }
+            { nome: "Hatchback Compacto", cat: "Urbano", desc: "Carro pequeno de 2 a 4 portas com porta-malas integrado para fácil manobra na cidade." },
+            { nome: "Sedan Subcompacto", cat: "Urbano", desc: "Sedan de porte menor com baixo consumo e bom espaço de porta-malas." },
+            { nome: "Sedan Médio", cat: "Familiar", desc: "O clássico carro de três volumes com foco em conforto familiar e tecnologia." },
+            { nome: "Sedan Executivo / Grande", cat: "Luxo", desc: "Veículo amplo com acabamento nobre, alta potência e extremo conforto traseiro." },
+            { nome: "SUV Compacto", cat: "Utilitário", desc: "Crossover urbano com posição alta de dirigir e ótimo vão livre do solo." },
+            { nome: "SUV Médio", cat: "Utilitário", desc: "SUV equilibrado com capacidade para passageiros e boa tração off-road." },
+            { nome: "SUV Full-Size (Grande)", cat: "Utilitário", desc: "Utilitário esportivo robusto com até 3 fileiras de assentos e chassi reforçado." },
+            { nome: "SUV Coupé", cat: "Esportivo", desc: "Mistura do teto caído de um coupé com a altura e postura de um SUV." },
+            { nome: "Perua / SW (Station Wagon)", cat: "Familiar", desc: "Carro derivado de sedan com teto estendido até a traseira e grande porta-malas." },
+            { nome: "Minivan / MPV", cat: "Familiar", desc: "Veículo focado no máximo aproveitamento de espaço interno e portas deslizantes." },
+            { nome: "Coupé de 2 Portas", cat: "Esportivo", desc: "Design aerodinâmico com teto inclinado e focado em esportividade visual." },
+            { nome: "Coupé de 4 Portas", cat: "Luxo Esportivo", desc: "Perfil esportivo de teto baixo com a praticidade de quatro portas." },
+            { nome: "Conversível / Roadster", cat: "Esportivo", desc: "Carro esportivo de 2 lugares com teto retrátil de pano ou rígido." },
+            { nome: "Cabriolet", cat: "Luxo", desc: "Conversível de 4 lugares focado no passeio ao ar livre com sofisticação." },
+            { nome: "Picape Leve", cat: "Trabalho", desc: "Picape de porte pequeno construída sobre monobloco para entregas e uso diário." },
+            { nome: "Picape Média", cat: "Trabalho/Off-Road", desc: "Picape com chassi sobre chassi com forte capacidade de carga e tração 4x4." },
+            { nome: "Picape Heavy Duty (Grande)", cat: "Trabalho Pesado", desc: "Gigantes a diesel com capacidade de reboque de várias toneladas." },
+            { nome: "Hipercarro", cat: "Exótico", desc: "O ápice do desempenho automotivo com motores com mais de 1000 cv e produção limitada." },
+            { nome: "Supercarro", cat: "Esportivo", desc: "Veículo de alta performance, aerodinâmica refinada e velocidade acima de 300 km/h." },
+            { nome: "Muscle Car", cat: "Clássico/Potência", desc: "Carro americano tradicional com motor V8 forte, tração traseira e design agressivo." },
+            { nome: "Hot Hatch", cat: "Esportivo", desc: "Hatchback com ajuste de suspensão esportivo, turbo e alta potência." },
+            { nome: "Crossover Urbano", cat: "Urbano", desc: "Mistura de hatch com características visuais de SUV para a cidade." },
+            { nome: "Carro Elétrico a Bateria (BEV)", cat: "Sustentável", desc: "Movido 100% por eletricidade sem emissão de poluentes no escapamento." },
+            { nome: "Híbrido Plug-in (PHEV)", cat: "Sustentável", desc: "Possui motor elétrico com recarga na tomada e motor a combustão reserva." },
+            { nome: "Híbrido Leve (MHEV)", cat: "Sustentável", desc: "Sistema elétrico de 48V para auxiliar o motor a combustão na economia." },
+            { nome: "Carro a Célula de Hidrogênio (FCEV)", cat: "Futurista", desc: "Gera eletricidade a partir do hidrogênio expelindo apenas água pelo escape." },
+            { nome: "Microcarro Urbano", cat: "Urbano", desc: "Ultra compacto para até 2 pessoas focado em estacionar em pequenos espaços." },
+            { nome: "Kei Car", cat: "JDM", desc: "Categoria japonesa de carros super compactos com limitações de tamanho e motor." },
+            { nome: "JDM (Japanese Domestic Market)", cat: "Cultura", desc: "Carros fabricados especificamente para o mercado esportivo japonês." },
+            { nome: "Track Tool / Carro de Pista", cat: "Corrida", desc: "Carro homologado para rua mas otimizado para dias de pista (Track Days)." },
+            { nome: "Buggy de Praia", cat: "Recreativo", desc: "Veículo leve com carroceria de fibra feito para trafegar em dunas de areia." },
+            { nome: "Carro Restomod", cat: "Custom", desc: "Carro clássico restaurado com mecânica, freios e suspensão modernas." },
+            { nome: "Sleeper / Carro Zé Bonitinho", cat: "Custom", desc: "Carro com visual simples por fora mas com motor preparação extrema por dentro." },
+            { nome: "Off-Road Utilitário Raiz", cat: "4x4", desc: "Chassi reforçado, eixos rígidos e reduzida para encarar lama pesada." },
+            { nome: "SUV Off-Road Extremo", cat: "4x4", desc: "SUV preparado de fábrica com bloqueios de diferencial e pneus de cravos." },
+            { nome: "Targa", cat: "Esportivo", desc: "Estilo com painel do teto removível e coluna traseira fixa de proteção." },
+            { nome: "Grand Tourer (GT)", cat: "Luxo Esportivo", desc: "Coupé de alta velocidade projetado para viagens longas e confortáveis." },
+            { nome: "Speedster", cat: "Esportivo", desc: "Conversível radical sem para-brisa completo ou sem janelas laterais." },
+            { nome: "Carro de Rali Homologado", cat: "Corrida", desc: "Versão de rua criada para permitir a participação do modelo em campeonatos de rali." },
+            { nome: "Shooting Brake", cat: "Luxo", desc: "Fusão elegante de coupé de 2 ou 4 portas com traseira de perua." }
         ];
 
         const categoriasExtras = ["Urbano", "Esportivo", "Luxo", "4x4 / Off-Road", "Trabalho", "Clássico", "Futurista", "Competição"];
@@ -281,18 +281,14 @@
             "Utilitário Militar 4x4", "Veículo Anfíbio Automotivo", "Carro Flying-Car (VAM)", "Protótipo de Recorde de Velocidade"
         ];
 
-        const tagsFotos = ["car", "sports-car", "luxury-car", "drive", "vehicle", "automotive", "auto", "speed"];
-
         while (tiposDeCarros.length < 200) {
             const idx = tiposDeCarros.length;
             const nomeBase = nomesExtras[idx % nomesExtras.length];
             const cat = categoriasExtras[idx % categoriasExtras.length];
-            const tagFoto = tagsFotos[idx % tagsFotos.length];
             
             tiposDeCarros.push({
                 nome: `${nomeBase} (Variante Spec-${idx + 1})`,
                 cat: cat,
-                tag: tagFoto,
                 desc: `Configuração específica de veículo voltada para uso em ${cat.toLowerCase()}, combinando engenharia automotiva e design focado.`
             });
         }
@@ -305,11 +301,13 @@
             lista.forEach((item, index) => {
                 const card = document.createElement('article');
                 card.className = 'card';
-                // Imagem gerada dinamicamente com base na tag do tipo de carro
-                const imageUrl = `https://source.unsplash.com/400x250/?${encodeURIComponent(item.tag)},car&sig=${index + 1}`;
+                
+                // Gera uma URL única com ID exclusivo para cada um dos 200 itens
+                const photoId = (index * 7) + 10;
+                const imageUrl = `https://picsum.photos/id/${photoId}/400/250`;
                 
                 card.innerHTML = `
-                    <img src="${imageUrl}" alt="${item.nome}" class="card-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&q=80'">
+                    <img src="${imageUrl}" alt="${item.nome}" class="card-img" loading="lazy" onerror="this.src='https://picsum.photos/400/250?random=${index}'">
                     <div class="card-body">
                         <div class="card-header">
                             <span class="card-num">#${index + 1}</span>
