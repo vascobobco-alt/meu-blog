@@ -1,198 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enciclopédia de Gêneros de Jogos</title>
+    <title>Meu Primeiro Site</title>
     <style>
-        * {
+        /* Estilos CSS simples para a página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
-            background-color: #0f0f12;
-            color: #f0f0f5;
-            padding: 2rem 1rem;
-        }
-
-        .header {
+        header {
+            background-color: #1a1a2e;
+            color: #ffffff;
+            padding: 1.5rem;
             text-align: center;
+        }
+
+        main {
             max-width: 800px;
-            margin: 0 auto 2rem auto;
-        }
-
-        .header h1 {
-            color: #9147ff;
-            margin-bottom: 0.5rem;
-            font-size: 2.2rem;
-        }
-
-        .header p {
-            color: #adadb8;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 500px;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            border: 2px solid #26262c;
-            background-color: #18181b;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-box:focus {
-            border-color: #9147ff;
-        }
-
-        .counter {
-            margin-top: 1rem;
-            font-weight: bold;
-            color: #00f59b;
-        }
-
-        .grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-
-        .card {
-            background-color: #18181b;
-            border: 1px solid #26262c;
-            border-radius: 8px;
+            margin: 2rem auto;
             padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: transform 0.2s, border-color 0.2s;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: #9147ff;
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .card-number {
-            background-color: #9147ff;
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            min-width: 35px;
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
             text-align: center;
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 1rem;
+            color: #777;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>🎮 200 Tipos e Subgêneros de Jogos</h1>
-        <p>Explore a lista completa de estilos de jogos eletrônicos e de tabuleiro.</p>
-        <input type="text" id="search" class="search-box" placeholder="Buscar tipo de jogo..." onkeyup="filtrar()">
-        <div class="counter" id="counter">Exibindo 200 tipos</div>
-    </div>
+    <header>
+        <h1>Bem-vindo ao Meu Site!</h1>
+    </header>
 
-    <div class="grid" id="lista-jogos"></div>
+    <main>
+        <h2>Subtítulo da Página</h2>
+        <p>Este é um parágrafo simples em HTML. Você pode adicionar informações, imagens e links aqui.</p>
+        
+        <button onclick="mensagem()">Clique Aqui</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Criado por mim</p>
+    </footer>
 
     <script>
-        // Array com 200 tipos, estilos e subgêneros de jogos
-        const tiposDeJogos = [
-            "RPG de Ação (ARPG)", "JRPG (RPG Japonês)", "MMORPG", "RPG de Turno", "Tactical RPG",
-            "RPG de Mesa Digital", "CRPG (Computer RPG)", "Roguelike", "Roguelite", "Soulslike",
-            "FPS (Tiro em 1ª Pessoa)", "TPS (Tiro em 3ª Pessoa)", "Hero Shooter", "Tactical Shooter", "Arena Shooter",
-            "Looter Shooter", "Boomer Shooter", "Shoot 'em up", "Bullet Hell", "Shmup de Rolagem Lateral",
-            "Plataforma 2D", "Plataforma 3D", "Metroidvania", "Precision Platformer", "Puzzle Platformer",
-            "RTS (Estratégia em Tempo Real)", "TBS (Estratégia em Turnos)", "Grand Strategy", "4X", "Auto Battler",
-            "MOBA", "Tower Defense", "Tática em Tempo Real", "Wargame", "Estratégia Cartográfica",
-            "Sobrevivência", "Sobrevivência em Ação", "Crafting & Building", "Battle Royale", "Extraction Shooter",
-            "Simulador de Vida", "Simulador de Fazenda", "Simulador de Voo", "Simulador de Corrida", "Simulador de Colônia",
-            "Simulador de Construção", "Simulador de Gestão", "Simulador de Condução", "Simulador Espacial", "Simulador Médico",
-            "Ação e Aventura", "Hack and Slash", "Beat 'em up", "Luta 2D", "Luta 3D",
-            "Platform Fighter", "Musou", "Stealth (Furtividade)", "Aventura Gráfica", "Point and Click",
-            "Visual Novel", "Filme Interativo", "Texto/MUD", "Walking Simulator", "Puzzle de Lógica",
-            "Puzzle 3D", "Match-3", "Sokoban", "Escape Room Digital", "Physics Puzzle",
-            "Jogo de Cartas (CCG)", "Deckbuilder", "Deckbuilder Roguelike", "Jogo de Tabuleiro Digital", "Party Game",
-            "Jogo de Ritmo", "Jogo Músical", "Dança", "Esporte Individual", "Esporte em Equipe",
-            "Futebol Arcade", "Basquete Simulação", "Corrida Arcade", "Corrida Simulação", "Kart Racing",
-            "Combat Flight Sim", "Combate Veicular", "Jogo de Pinball", "Sandbox", "Open World (Mundo Aberto)",
-            "Terror de Sobrevivência (Survival Horror)", "Psychological Horror", "Action Horror", "Mascot Horror", "Asymmetrical Horror",
-            "Tower Defense 3D", "Idler / Clicker", "Incremental Game", "Jogo de Trivia", "Jogo de Palavras",
-            "Hidden Object", "Jogo de Estratégia em Cartas", "God Game", "Simulador de Cidade (City Builder)", "Simulador de Parque",
-            "Simulador de Restaurante", "Simulador de Negócios", "Tycoon", "Jogo de Mistério", "Detetive e Investigação",
-            "Dungeon Crawler", "Grid-based RPG", "Monster Tamer", "Hero Collector (Gacha)", "Gacha RPG",
-            "Jogo Educativo", "Serious Game", "Exergame (Fitness)", "Realidade Virtual (VR)", "Realidade Aumentada (AR)",
-            "Jogo de Mineração", "Automated Factory (Automação)", "Space Exploration", "Naval Combat", "Dogfight Espacial",
-            "Artillery Game", "Tower Offense", "Time Management", "Jogo de Aposta/Cassino Virtual", "Jogo Social",
-            "Rhythm Platformer", "Speedrunner", "Boss Rush", "Bullet Hell Vertical", "Twin-Stick Shooter",
-            "Top-Down Shooter", "Co-op de Sofá", "Co-op Online", "PvP Competitivo", "Asymmetric PvP",
-            "Jogo Imersivo (Immersive Sim)", "Rhythm Action", "Quick Time Event (QTE) Focused", "Simulador de Treino", "Interactive Fiction",
-            "Dating Sim", "Otome Game", "Life Sim Social", "Jogo de Pesca", "Jogo de Caça",
-            "Skateboarding", "Extreme Sports", "BMX / Ciclismo", "Snowboarding", "Golf Sim / Arcade",
-            "Snooker / Sinuca", "Jogo de Dardos", "Boliche Digital", "Luta Livre (Wrestling)", "MMA / Artes Marciais",
-            "RTS de Cartas", "Turn-Based Tactic 3D", "Simulador de Vida Selvagem", "Simulador Submarino", "Simulador de Trem",
-            "Simulador de Caminhão", "Physics Sandbox", "Voxel Game", "Pixel Art Action", "FMV (Full Motion Video)",
-            "Jogo de Minijogos", "Quiz Game", "Jogo de Desenho", "Social Deduction (Dedução Social)", "Mafia / Among Us Style",
-            "Card Battler 3D", "Real-Time Tactics 3D", "Estratégia Histórica", "Estratégia Sci-Fi", "Estratégia Fantasia",
-            "Cyberpunk RPG", "Steampunk Adventure", "Post-Apocalyptic Survival", "Zombie Survival", "Space Opera RPG",
-            "Mecha Combat", "Kaiju Combat", "Superhero Action", "Anime Fighter", "Spectacle Fighter",
-            "Retro Action", "8-bit Nostalgia", "16-bit Platformer", "Demake", "Fan Game",
-            "Casual Game", "Hyper-Casual", "Mid-Core Game", "Hardcore Survival", "Competitive Fighter"
-        ];
-
-        const container = document.getElementById('lista-jogos');
-        const counter = document.getElementById('counter');
-
-        function renderizarJogos(lista) {
-            container.innerHTML = '';
-            lista.forEach((jogo, index) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <span class="card-number">${index + 1}</span>
-                    <span class="card-title">${jogo}</span>
-                `;
-                container.appendChild(card);
-            });
-            counter.innerText = `Exibindo ${lista.length} tipos`;
+        // Código JavaScript simples para interatividade
+        function mensagem() {
+            alert('Olá! Você clicou no botão.');
         }
-
-        function filtrar() {
-            const texto = document.getElementById('search').value.toLowerCase();
-            const filtrados = tiposDeJogos.filter(jogo => 
-                jogo.toLowerCase().includes(texto)
-            );
-            renderizarJogos(filtrados);
-        }
-
-        // Renderiza todos os 200 tipos ao carregar a página
-        renderizarJogos(tiposDeJogos);
     </script>
+
 </body>
 </html>
