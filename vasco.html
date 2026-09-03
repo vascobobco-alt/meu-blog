@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AutoSport - Blog de Carros Esportivos</title>
   <style>
-    /* Reset e Estilos Gerais */
     * {
       margin: 0;
       padding: 0;
@@ -19,7 +18,6 @@
       padding-bottom: 40px;
     }
 
-    /* Cabeçalho */
     header {
       background-color: #1e1e1e;
       text-align: center;
@@ -39,15 +37,18 @@
       margin-top: 5px;
     }
 
-    /* Campo de Busca */
-    .search-container {
+    /* Painel de Controle e Interações */
+    .controls-container {
       max-width: 1200px;
       margin: 20px auto;
       padding: 0 20px;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
     }
 
-    .search-container input {
+    .search-input {
       width: 100%;
       max-width: 500px;
       padding: 12px 20px;
@@ -59,21 +60,50 @@
       outline: none;
     }
 
-    .search-container input:focus {
+    .search-input:focus {
       border-color: #e50914;
     }
 
-    /* Container dos Cards */
+    /* Botões de Categoria */
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      background-color: #1e1e1e;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: #e50914;
+      border-color: #e50914;
+    }
+
+    /* Contador de Resultados */
+    .results-count {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Grid da Galeria */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 25px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 20px auto 0;
       padding: 0 20px;
     }
 
-    /* Estilo dos Cards */
     .card {
       background-color: #1e1e1e;
       border-radius: 10px;
@@ -95,6 +125,18 @@
 
     .card-content {
       padding: 15px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      background-color: #2a2a2a;
+      color: #e50914;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
     .card-title {
@@ -135,76 +177,68 @@
     <p>A coleção definitiva dos carros esportivos mais incríveis do mundo</p>
   </header>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar modelo de carro..." onkeyup="filtrarCarros()">
+  <div class="controls-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Buscar modelo de carro..." oninput="filtrarGeral()">
+    
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filtrarCategoria('todas', this)">Todas</button>
+      <button class="filter-btn" onclick="filtrarCategoria('Superesportivo', this)">Superesportivos</button>
+      <button class="filter-btn" onclick="filtrarCategoria('Muscle Car', this)">Muscle Cars</button>
+      <button class="filter-btn" onclick="filtrarCategoria('JDM', this)">JDM</button>
+    </div>
+
+    <div class="results-count" id="resultsCount">Exibindo 200 de 200 carros</div>
   </div>
 
-  <main class="gallery" id="carGallery">
-    <!-- Os 200 carros serão carregados dinamicamente via JS -->
-  </main>
+  <main class="gallery" id="carGallery"></main>
 
   <script>
-    // Lista Base de Dados dos Carros (Expansível até 200 itens)
-    const carros = [
-      {
-        id: 1,
-        nome: "Ferrari F8 Tributo",
-        potencia: "720 cv | 0-100 km/h: 2.9s",
-        imagem: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 2,
-        nome: "Porsche 911 GT3 RS",
-        potencia: "525 cv | 0-100 km/h: 3.2s",
-        imagem: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 3,
-        nome: "Lamborghini Huracán EVO",
-        potencia: "640 cv | 0-100 km/h: 2.9s",
-        imagem: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 4,
-        nome: "McLaren 720S",
-        potencia: "720 cv | 0-100 km/h: 2.9s",
-        imagem: "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 5,
-        nome: "Nissan GT-R Nismo",
-        potencia: "600 cv | 0-100 km/h: 2.8s",
-        imagem: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80"
-      }
+    const modelosBase = [
+      { nome: "Ferrari F8 Tributo", potencia: "720 cv | 0-100 km/h: 2.9s", categoria: "Superesportivo", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80" },
+      { nome: "Ford Mustang GT", potencia: "488 cv | 0-100 km/h: 4.3s", categoria: "Muscle Car", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=600&q=80" },
+      { nome: "Nissan GT-R R35", potencia: "570 cv | 0-100 km/h: 2.8s", categoria: "JDM", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80" },
+      { nome: "Porsche 911 GT3 RS", potencia: "525 cv | 0-100 km/h: 3.2s", categoria: "Superesportivo", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80" },
+      { nome: "Chevrolet Corvette C8", potencia: "502 cv | 0-100 km/h: 2.9s", categoria: "Muscle Car", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" }
     ];
 
-    // Função para preencher automaticamente a lista até atingir 200 carros de exemplo
+    // Gerador dinâmico dos 200 carros
     function gerar200Carros() {
-      const listaCompleta = [];
+      const lista = [];
       for (let i = 1; i <= 200; i++) {
-        const carroBase = carros[(i - 1) % carros.length];
-        listaCompleta.push({
+        const base = modelosBase[(i - 1) % modelosBase.length];
+        lista.push({
           id: i,
-          nome: `${carroBase.nome} #${i}`,
-          potencia: carroBase.potencia,
-          imagem: carroBase.imagem
+          nome: `${base.nome} #${i}`,
+          potencia: base.potencia,
+          categoria: base.categoria,
+          imagem: base.img
         });
       }
-      return listaCompleta;
+      return lista;
     }
 
     const todosOsCarros = gerar200Carros();
+    let categoriaAtual = 'todas';
 
-    // Renderizar Cards no HTML
+    // Renderiza a lista na tela
     function renderizarGaleria(dados) {
       const container = document.getElementById("carGallery");
+      const countLabel = document.getElementById("resultsCount");
+      
       container.innerHTML = "";
+      countLabel.textContent = `Exibindo ${dados.length} de 200 carros`;
+
+      if (dados.length === 0) {
+        container.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: #777;'>Nenhum carro encontrado.</p>";
+        return;
+      }
 
       dados.forEach(carro => {
         const cardHTML = `
           <div class="card">
             <img src="${carro.imagem}" alt="${carro.nome}" loading="lazy">
             <div class="card-content">
+              <span class="card-tag">${carro.categoria}</span>
               <h2 class="card-title">${carro.nome}</h2>
               <p class="card-specs">${carro.potencia}</p>
               <a href="#" class="card-btn">Ver Detalhes</a>
@@ -215,17 +249,11 @@
       });
     }
 
-    // Filtro de Busca em Tempo Real
-    function filtrarCarros() {
+    // Filtra aplicando busca de texto e categoria junta
+    function filtrarGeral() {
       const termo = document.getElementById("searchInput").value.toLowerCase();
-      const resultado = todosOsCarros.filter(carro => 
-        carro.nome.toLowerCase().includes(termo)
-      );
-      renderizarGaleria(resultado);
-    }
-
-    // Inicializa a página com os 200 cards
-    renderizarGaleria(todosOsCarros);
-  </script>
-</body>
-</html>
+      
+      const resultado = todosOsCarros.filter(carro => {
+        const atendeTexto = carro.nome.toLowerCase().includes(termo);
+        const atendeCategoria = categoriaAtual === 'todas' || carro.categoria === categoriaAtual;
+        return atendeTexto
