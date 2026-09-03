@@ -1,342 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoWorld - 200 Tipos e Estilos de Carros</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoSport - Blog de Carros Esportivos</title>
+  <style>
+    /* Reset e Estilos Gerais */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --accent-blue: #58a6ff;
-            --accent-orange: #f0883e;
-            --text-main: #c9d1d9;
-            --text-heading: #ffffff;
-            --border-color: #30363d;
-        }
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      padding-bottom: 40px;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+    /* Cabeçalho */
+    header {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 3px solid #e50914;
+    }
 
-        header {
-            background-color: #161b22;
-            border-bottom: 2px solid var(--accent-blue);
-            padding: 2rem 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
+    header h1 {
+      font-size: 2.5rem;
+      color: #e50914;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
-        header h1 {
-            color: var(--text-heading);
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
+    header p {
+      color: #aaa;
+      margin-top: 5px;
+    }
 
-        header h1 span {
-            color: var(--accent-blue);
-        }
+    /* Campo de Busca */
+    .search-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
 
-        header p {
-            color: #8b949e;
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
-        }
+    .search-container input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border-radius: 25px;
+      border: 1px solid #333;
+      background-color: #1e1e1e;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
 
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            gap: 0.8rem;
-        }
+    .search-container input:focus {
+      border-color: #e50914;
+    }
 
-        .search-input {
-            flex: 1;
-            padding: 0.7rem 1rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: #0d1117;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-        }
+    /* Container dos Cards */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .search-input:focus {
-            border-color: var(--accent-blue);
-        }
+    /* Estilo dos Cards */
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .counter {
-            margin-top: 0.8rem;
-            font-weight: bold;
-            color: var(--accent-orange);
-            font-size: 0.9rem;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+    }
 
-        .container {
-            max-width: 1300px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
+    .card-content {
+      padding: 15px;
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
 
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-blue);
-        }
+    .card-specs {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
 
-        .card-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background-color: #21262d;
-        }
+    .card-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      background-color: #e50914;
+      color: #fff;
+      padding: 10px 0;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
 
-        .card-body {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-        }
-
-        .card-num {
-            background-color: var(--accent-blue);
-            color: #0d1117;
-            font-weight: bold;
-            font-size: 0.8rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-        }
-
-        .card-cat {
-            font-size: 0.75rem;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        .card-title {
-            color: var(--text-heading);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-desc {
-            font-size: 0.88rem;
-            color: #8b949e;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 0.8rem;
-            font-size: 0.8rem;
-            color: #8b949e;
-        }
-
-        .btn-more {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn-more:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            color: #8b949e;
-            margin-top: 3rem;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.6rem; }
-            .grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    .card-btn:hover {
+      background-color: #b20710;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>AutoWorld <span>🚗</span></h1>
-        <p>Enciclopédia Completa: 200 Tipos, Categorias e Estilos de Automóveis</p>
-        <div class="search-container">
-            <input type="text" id="search" class="search-input" placeholder="Buscar por tipo de carro (ex: SUV, Elétrico, Track...)" onkeyup="filtrar()">
-        </div>
-        <div class="counter" id="counter">Exibindo 200 tipos de carros</div>
-    </header>
+  <header>
+    <h1>AutoSport Blog</h1>
+    <p>A coleção definitiva dos carros esportivos mais incríveis do mundo</p>
+  </header>
 
-    <div class="container">
-        <div class="grid" id="carGrid"></div>
-    </div>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar modelo de carro..." onkeyup="filtrarCarros()">
+  </div>
 
-    <footer>
-        <p>&copy; 2026 AutoWorld Blog — Guia Ilustrativo de Veículos e Automóveis.</p>
-    </footer>
+  <main class="gallery" id="carGallery">
+    <!-- Os 200 carros serão carregados dinamicamente via JS -->
+  </main>
 
-    <script>
-        const tiposDeCarros = [
-            { nome: "Hatchback Compacto", cat: "Urbano", desc: "Carro pequeno de 2 a 4 portas com porta-malas integrado para fácil manobra na cidade." },
-            { nome: "Sedan Subcompacto", cat: "Urbano", desc: "Sedan de porte menor com baixo consumo e bom espaço de porta-malas." },
-            { nome: "Sedan Médio", cat: "Familiar", desc: "O clássico carro de três volumes com foco em conforto familiar e tecnologia." },
-            { nome: "Sedan Executivo / Grande", cat: "Luxo", desc: "Veículo amplo com acabamento nobre, alta potência e extremo conforto traseiro." },
-            { nome: "SUV Compacto", cat: "Utilitário", desc: "Crossover urbano com posição alta de dirigir e ótimo vão livre do solo." },
-            { nome: "SUV Médio", cat: "Utilitário", desc: "SUV equilibrado com capacidade para passageiros e boa tração off-road." },
-            { nome: "SUV Full-Size (Grande)", cat: "Utilitário", desc: "Utilitário esportivo robusto com até 3 fileiras de assentos e chassi reforçado." },
-            { nome: "SUV Coupé", cat: "Esportivo", desc: "Mistura do teto caído de um coupé com a altura e postura de um SUV." },
-            { nome: "Perua / SW (Station Wagon)", cat: "Familiar", desc: "Carro derivado de sedan com teto estendido até a traseira e grande porta-malas." },
-            { nome: "Minivan / MPV", cat: "Familiar", desc: "Veículo focado no máximo aproveitamento de espaço interno e portas deslizantes." },
-            { nome: "Coupé de 2 Portas", cat: "Esportivo", desc: "Design aerodinâmico com teto inclinado e focado em esportividade visual." },
-            { nome: "Coupé de 4 Portas", cat: "Luxo Esportivo", desc: "Perfil esportivo de teto baixo com a praticidade de quatro portas." },
-            { nome: "Conversível / Roadster", cat: "Esportivo", desc: "Carro esportivo de 2 lugares com teto retrátil de pano ou rígido." },
-            { nome: "Cabriolet", cat: "Luxo", desc: "Conversível de 4 lugares focado no passeio ao ar livre com sofisticação." },
-            { nome: "Picape Leve", cat: "Trabalho", desc: "Picape de porte pequeno construída sobre monobloco para entregas e uso diário." },
-            { nome: "Picape Média", cat: "Trabalho/Off-Road", desc: "Picape com chassi sobre chassi com forte capacidade de carga e tração 4x4." },
-            { nome: "Picape Heavy Duty (Grande)", cat: "Trabalho Pesado", desc: "Gigantes a diesel com capacidade de reboque de várias toneladas." },
-            { nome: "Hipercarro", cat: "Exótico", desc: "O ápice do desempenho automotivo com motores com mais de 1000 cv e produção limitada." },
-            { nome: "Supercarro", cat: "Esportivo", desc: "Veículo de alta performance, aerodinâmica refinada e velocidade acima de 300 km/h." },
-            { nome: "Muscle Car", cat: "Clássico/Potência", desc: "Carro americano tradicional com motor V8 forte, tração traseira e design agressivo." },
-            { nome: "Hot Hatch", cat: "Esportivo", desc: "Hatchback com ajuste de suspensão esportivo, turbo e alta potência." },
-            { nome: "Crossover Urbano", cat: "Urbano", desc: "Mistura de hatch com características visuais de SUV para a cidade." },
-            { nome: "Carro Elétrico a Bateria (BEV)", cat: "Sustentável", desc: "Movido 100% por eletricidade sem emissão de poluentes no escapamento." },
-            { nome: "Híbrido Plug-in (PHEV)", cat: "Sustentável", desc: "Possui motor elétrico com recarga na tomada e motor a combustão reserva." },
-            { nome: "Híbrido Leve (MHEV)", cat: "Sustentável", desc: "Sistema elétrico de 48V para auxiliar o motor a combustão na economia." },
-            { nome: "Carro a Célula de Hidrogênio (FCEV)", cat: "Futurista", desc: "Gera eletricidade a partir do hidrogênio expelindo apenas água pelo escape." },
-            { nome: "Microcarro Urbano", cat: "Urbano", desc: "Ultra compacto para até 2 pessoas focado em estacionar em pequenos espaços." },
-            { nome: "Kei Car", cat: "JDM", desc: "Categoria japonesa de carros super compactos com limitações de tamanho e motor." },
-            { nome: "JDM (Japanese Domestic Market)", cat: "Cultura", desc: "Carros fabricados especificamente para o mercado esportivo japonês." },
-            { nome: "Track Tool / Carro de Pista", cat: "Corrida", desc: "Carro homologado para rua mas otimizado para dias de pista (Track Days)." },
-            { nome: "Buggy de Praia", cat: "Recreativo", desc: "Veículo leve com carroceria de fibra feito para trafegar em dunas de areia." },
-            { nome: "Carro Restomod", cat: "Custom", desc: "Carro clássico restaurado com mecânica, freios e suspensão modernas." },
-            { nome: "Sleeper / Carro Zé Bonitinho", cat: "Custom", desc: "Carro com visual simples por fora mas com motor preparação extrema por dentro." },
-            { nome: "Off-Road Utilitário Raiz", cat: "4x4", desc: "Chassi reforçado, eixos rígidos e reduzida para encarar lama pesada." },
-            { nome: "SUV Off-Road Extremo", cat: "4x4", desc: "SUV preparado de fábrica com bloqueios de diferencial e pneus de cravos." },
-            { nome: "Targa", cat: "Esportivo", desc: "Estilo com painel do teto removível e coluna traseira fixa de proteção." },
-            { nome: "Grand Tourer (GT)", cat: "Luxo Esportivo", desc: "Coupé de alta velocidade projetado para viagens longas e confortáveis." },
-            { nome: "Speedster", cat: "Esportivo", desc: "Conversível radical sem para-brisa completo ou sem janelas laterais." },
-            { nome: "Carro de Rali Homologado", cat: "Corrida", desc: "Versão de rua criada para permitir a participação do modelo em campeonatos de rali." },
-            { nome: "Shooting Brake", cat: "Luxo", desc: "Fusão elegante de coupé de 2 ou 4 portas com traseira de perua." }
-        ];
+  <script>
+    // Lista Base de Dados dos Carros (Expansível até 200 itens)
+    const carros = [
+      {
+        id: 1,
+        nome: "Ferrari F8 Tributo",
+        potencia: "720 cv | 0-100 km/h: 2.9s",
+        imagem: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2,
+        nome: "Porsche 911 GT3 RS",
+        potencia: "525 cv | 0-100 km/h: 3.2s",
+        imagem: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3,
+        nome: "Lamborghini Huracán EVO",
+        potencia: "640 cv | 0-100 km/h: 2.9s",
+        imagem: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4,
+        nome: "McLaren 720S",
+        potencia: "720 cv | 0-100 km/h: 2.9s",
+        imagem: "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 5,
+        nome: "Nissan GT-R Nismo",
+        potencia: "600 cv | 0-100 km/h: 2.8s",
+        imagem: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
 
-        const categoriasExtras = ["Urbano", "Esportivo", "Luxo", "4x4 / Off-Road", "Trabalho", "Clássico", "Futurista", "Competição"];
-        const nomesExtras = [
-            "Sedan Blindado Nível III-A", "Picape Cabine Simples", "Picape Cabine Dupla", "Picape Cabine Estendida", 
-            "Van de Passageiros", "Furgão de Carga", "Chassi Cabine", "Campervan / Motorhome", 
-            "Carro de Drift Preparado", "Carro de Arrancada (Dragster)", "Protótipo de Le Mans (LMDh)", 
-            "Buggy 4x4 Trophy Truck", "Rock Crawler", "Limusine Estendida", "Carro Conceito (Concept)", 
-            "Hot Rod V8", "Rat Rod", "Carro de Lowrider", "Tuk-Tuk Elétrico", "Carro Autônomo sem Volante",
-            "Coupé V12 Atmosférico", "Super SUV a Bateria", "Hyper SUV W16", "Hatch de Corrida Monomarca",
-            "Carro de Time-Attack", "Sedan Esportivo V8", "Sedan Esportivo Bi-Turbo", "Perua Esportiva V8",
-            "SUV Blindado Executivo", "Picape Elétrica Dual-Motor", "Picape Elétrica Tri-Motor", "Triciclo Automotivo",
-            "Quadriciclo Homologado", "Micro-Van Keicar", "Hatch Convertido Elétrico", "Carro Solar",
-            "Sedan Coupé Fastback", "Coupé Liftback", "Roadster Leve Monoplace", "Esportivo de Motor Traseiro",
-            "Esportivo de Motor Central", "Supercarro Híbrido V6", "Supercarro V10 Naturalmente Aspirado",
-            "KART Cross 250cc", "SUT (Sport Utility Truck)", "SAV (Sports Activity Vehicle)", "SAC (Sports Activity Coupe)",
-            "Crossover 100% Elétrico", "Sedan Executivo Híbrido", "SW Off-Road Aventureira", "Hatch Aventureiro Suspensão Alta",
-            "Carro de Autoescola Adaptado", "Taxi Utilitário Flex", "Carro Compartilhado Urbano", "Kombi / Van Clássica",
-            "Utilitário Militar 4x4", "Veículo Anfíbio Automotivo", "Carro Flying-Car (VAM)", "Protótipo de Recorde de Velocidade"
-        ];
+    // Função para preencher automaticamente a lista até atingir 200 carros de exemplo
+    function gerar200Carros() {
+      const listaCompleta = [];
+      for (let i = 1; i <= 200; i++) {
+        const carroBase = carros[(i - 1) % carros.length];
+        listaCompleta.push({
+          id: i,
+          nome: `${carroBase.nome} #${i}`,
+          potencia: carroBase.potencia,
+          imagem: carroBase.imagem
+        });
+      }
+      return listaCompleta;
+    }
 
-        while (tiposDeCarros.length < 200) {
-            const idx = tiposDeCarros.length;
-            const nomeBase = nomesExtras[idx % nomesExtras.length];
-            const cat = categoriasExtras[idx % categoriasExtras.length];
-            
-            tiposDeCarros.push({
-                nome: `${nomeBase} (Variante Spec-${idx + 1})`,
-                cat: cat,
-                desc: `Configuração específica de veículo voltada para uso em ${cat.toLowerCase()}, combinando engenharia automotiva e design focado.`
-            });
-        }
+    const todosOsCarros = gerar200Carros();
 
-        const grid = document.getElementById('carGrid');
-        const counter = document.getElementById('counter');
+    // Renderizar Cards no HTML
+    function renderizarGaleria(dados) {
+      const container = document.getElementById("carGallery");
+      container.innerHTML = "";
 
-        function renderizar(lista) {
-            grid.innerHTML = '';
-            lista.forEach((item, index) => {
-                const card = document.createElement('article');
-                card.className = 'card';
-                
-                // Gera uma URL única com ID exclusivo para cada um dos 200 itens
-                const photoId = (index * 7) + 10;
-                const imageUrl = `https://picsum.photos/id/${photoId}/400/250`;
-                
-                card.innerHTML = `
-                    <img src="${imageUrl}" alt="${item.nome}" class="card-img" loading="lazy" onerror="this.src='https://picsum.photos/400/250?random=${index}'">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <span class="card-num">#${index + 1}</span>
-                            <span class="card-cat">${item.cat}</span>
-                        </div>
-                        <h2 class="card-title">${item.nome}</h2>
-                        <p class="card-desc">${item.desc}</p>
-                        <div class="card-footer">
-                            <span>Categoria: ${item.cat}</span>
-                            <a href="#" class="btn-more">Ver Detalhes &rarr;</a>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            counter.innerText = `Exibindo ${lista.length} tipos de carros`;
-        }
+      dados.forEach(carro => {
+        const cardHTML = `
+          <div class="card">
+            <img src="${carro.imagem}" alt="${carro.nome}" loading="lazy">
+            <div class="card-content">
+              <h2 class="card-title">${carro.nome}</h2>
+              <p class="card-specs">${carro.potencia}</p>
+              <a href="#" class="card-btn">Ver Detalhes</a>
+            </div>
+          </div>
+        `;
+        container.innerHTML += cardHTML;
+      });
+    }
 
-        function filtrar() {
-            const texto = document.getElementById('search').value.toLowerCase();
-            const filtrados = tiposDeCarros.filter(car => 
-                car.nome.toLowerCase().includes(texto) || 
-                car.cat.toLowerCase().includes(texto) ||
-                car.desc.toLowerCase().includes(texto)
-            );
-            renderizar(filtrados);
-        }
+    // Filtro de Busca em Tempo Real
+    function filtrarCarros() {
+      const termo = document.getElementById("searchInput").value.toLowerCase();
+      const resultado = todosOsCarros.filter(carro => 
+        carro.nome.toLowerCase().includes(termo)
+      );
+      renderizarGaleria(resultado);
+    }
 
-        renderizar(tiposDeCarros);
-    </script>
+    // Inicializa a página com os 200 cards
+    renderizarGaleria(todosOsCarros);
+  </script>
 </body>
 </html>
