@@ -256,4 +256,25 @@
       const resultado = todosOsCarros.filter(carro => {
         const atendeTexto = carro.nome.toLowerCase().includes(termo);
         const atendeCategoria = categoriaAtual === 'todas' || carro.categoria === categoriaAtual;
-        return atendeTexto
+        return atendeTexto && atendeCategoria;
+      });
+
+      renderizarGaleria(resultado);
+    }
+
+    // Altera a categoria selecionada
+    function filtrarCategoria(cat, elemento) {
+      categoriaAtual = cat;
+      
+      // Atualiza visual dos botões
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      elemento.classList.add('active');
+
+      filtrarGeral();
+    }
+
+    // Inicialização
+    renderizarGaleria(todosOsCarros);
+  </script>
+</body>
+</html>
