@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AutoSport - Blog de Carros Esportivos</title>
   <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #ffffff;
+      --accent-color: #e50914;
+      --subtext-color: #aaa;
+      --border-color: #333;
+      --font-scale: 1;
+    }
+
+    /* Classe aplicada para modo Alto Contraste */
+    body.high-contrast {
+      --bg-color: #000000;
+      --card-bg: #000000;
+      --text-color: #ffff00;
+      --accent-color: #ffff00;
+      --subtext-color: #ffffff;
+      --border-color: #ffff00;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,27 +33,57 @@
     }
 
     body {
-      background-color: #121212;
-      color: #ffffff;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       padding-bottom: 40px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    /* Barra de Acessibilidade no Topo */
+    .accessibility-bar {
+      background-color: #0d0d0d;
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .accessibility-btn {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .accessibility-btn:hover {
+      background-color: var(--accent-color);
+      color: #fff;
     }
 
     header {
-      background-color: #1e1e1e;
+      background-color: var(--card-bg);
       text-align: center;
       padding: 2rem 1rem;
-      border-bottom: 3px solid #e50914;
+      border-bottom: 3px solid var(--accent-color);
     }
 
     header h1 {
-      font-size: 2.5rem;
-      color: #e50914;
+      font-size: calc(2.5rem * var(--font-scale));
+      color: var(--accent-color);
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
     header p {
-      color: #aaa;
+      color: var(--subtext-color);
       margin-top: 5px;
     }
 
@@ -53,15 +103,15 @@
       max-width: 500px;
       padding: 12px 20px;
       border-radius: 25px;
-      border: 1px solid #333;
-      background-color: #1e1e1e;
-      color: #fff;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      color: var(--text-color);
       font-size: 1rem;
       outline: none;
     }
 
     .search-input:focus {
-      border-color: #e50914;
+      border-color: var(--accent-color);
     }
 
     /* Botões de Categoria */
@@ -73,9 +123,9 @@
     }
 
     .filter-btn {
-      background-color: #1e1e1e;
-      color: #fff;
-      border: 1px solid #333;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
       padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
@@ -84,13 +134,14 @@
     }
 
     .filter-btn:hover, .filter-btn.active {
-      background-color: #e50914;
-      border-color: #e50914;
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #fff;
     }
 
     /* Contador de Resultados */
     .results-count {
-      color: #888;
+      color: var(--subtext-color);
       font-size: 0.9rem;
     }
 
@@ -105,7 +156,8 @@
     }
 
     .card {
-      background-color: #1e1e1e;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -130,7 +182,7 @@
     .card-tag {
       display: inline-block;
       background-color: #2a2a2a;
-      color: #e50914;
+      color: var(--accent-color);
       font-size: 0.75rem;
       font-weight: bold;
       padding: 3px 8px;
@@ -140,14 +192,14 @@
     }
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: calc(1.25rem * var(--font-scale));
       margin-bottom: 8px;
-      color: #fff;
+      color: var(--text-color);
     }
 
     .card-specs {
-      font-size: 0.9rem;
-      color: #aaa;
+      font-size: calc(0.9rem * var(--font-scale));
+      color: var(--subtext-color);
       margin-bottom: 15px;
       line-height: 1.4;
     }
@@ -156,7 +208,7 @@
       display: inline-block;
       width: 100%;
       text-align: center;
-      background-color: #e50914;
+      background-color: var(--accent-color);
       color: #fff;
       padding: 10px 0;
       border-radius: 5px;
@@ -171,6 +223,15 @@
   </style>
 </head>
 <body>
+
+  <!-- Barra Superior de Acessibilidade -->
+  <nav class="accessibility-bar" aria-label="Menu de Acessibilidade">
+    <button class="accessibility-btn" onclick="alterarFonte(0.1)" title="Aumentar Fonte">A+</button>
+    <button class="accessibility-btn" onclick="alterarFonte(-0.1)" title="Diminuir Fonte">A-</button>
+    <button class="accessibility-btn" onclick="resetarFonte()" title="Tamanho Padrão">A (Padrão)</button>
+    <button class="accessibility-btn" onclick="toggleAltoContraste()" title="Alternar Alto Contraste">Alto Contraste</button>
+    <button class="accessibility-btn" onclick="lerPagina()" title="Ouvir Conteúdo">🔊 Leitor de Voz</button>
+  </nav>
 
   <header>
     <h1>AutoSport Blog</h1>
@@ -193,6 +254,38 @@
   <main class="gallery" id="carGallery"></main>
 
   <script>
+    // --- LÓGICA DE ACESSIBILIDADE ---
+    let escalaFonteAtual = 1;
+
+    function alterarFonte(fator) {
+      if ((escalaFonteAtual + fator >= 0.8) && (escalaFonteAtual + fator <= 1.5)) {
+        escalaFonteAtual += fator;
+        document.documentElement.style.setProperty('--font-scale', escalaFonteAtual);
+      }
+    }
+
+    function resetarFonte() {
+      escalaFonteAtual = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    function toggleAltoContraste() {
+      document.body.classList.toggle('high-contrast');
+    }
+
+    function lerPagina() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const texto = `Você está no AutoSport Blog. ${document.getElementById('resultsCount').textContent}.`;
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'pt-BR';
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("A síntese de voz não é suportada neste navegador.");
+      }
+    }
+
+    // --- DADOS E RENDEREZAÇÃO DA GALERIA ---
     const modelosBase = [
       { nome: "Ferrari F8 Tributo", potencia: "720 cv | 0-100 km/h: 2.9s", categoria: "Superesportivo", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80" },
       { nome: "Ford Mustang GT", potencia: "488 cv | 0-100 km/h: 4.3s", categoria: "Muscle Car", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=600&q=80" },
@@ -201,7 +294,6 @@
       { nome: "Chevrolet Corvette C8", potencia: "502 cv | 0-100 km/h: 2.9s", categoria: "Muscle Car", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" }
     ];
 
-    // Gerador dinâmico dos 200 carros
     function gerar200Carros() {
       const lista = [];
       for (let i = 1; i <= 200; i++) {
@@ -220,7 +312,6 @@
     const todosOsCarros = gerar200Carros();
     let categoriaAtual = 'todas';
 
-    // Renderiza a lista na tela
     function renderizarGaleria(dados) {
       const container = document.getElementById("carGallery");
       const countLabel = document.getElementById("resultsCount");
@@ -249,7 +340,6 @@
       });
     }
 
-    // Filtra aplicando busca de texto e categoria junta
     function filtrarGeral() {
       const termo = document.getElementById("searchInput").value.toLowerCase();
       
@@ -262,18 +352,13 @@
       renderizarGaleria(resultado);
     }
 
-    // Altera a categoria selecionada
     function filtrarCategoria(cat, elemento) {
       categoriaAtual = cat;
-      
-      // Atualiza visual dos botões
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       elemento.classList.add('active');
-
       filtrarGeral();
     }
 
-    // Inicialização
     renderizarGaleria(todosOsCarros);
   </script>
 </body>
