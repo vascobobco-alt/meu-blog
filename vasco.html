@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garagem de Carros Esportivos Avançada</title>
+    <title>SuperCars Blog - Página Inicial</title>
     <style>
         /* --- CONFIGURAÇÃO DE TEMAS (VARIÁVEIS CSS) --- */
         :root {
             --bg-color: #f4f4f9;
             --panel-bg: #ffffff;
             --text-color: #333333;
-            --primary-color: #d32f2f;
+            --primary-color: #d32f2f; /* Vermelho Esportivo */
             --border-color: #cccccc;
-            --table-stripe: #f9f9f9;
-            --modal-overlay: rgba(0, 0, 0, 0.7);
+            --badge-bg: #e0e0e0;
         }
 
         [data-theme="dark"] {
@@ -22,18 +21,16 @@
             --text-color: #e0e0e0;
             --primary-color: #ff5252;
             --border-color: #444444;
-            --table-stripe: #2a2a2a;
-            --modal-overlay: rgba(0, 0, 0, 0.85);
+            --badge-bg: #333333;
         }
 
         [data-theme="high-contrast"] {
             --bg-color: #000000;
             --panel-bg: #000000;
-            --text-color: #ffff00;
+            --text-color: #ffff00; /* Texto amarelo para máximo contraste */
             --primary-color: #ffffff;
             --border-color: #ffffff;
-            --table-stripe: #000000;
-            --modal-overlay: rgba(255, 255, 255, 0.2);
+            --badge-bg: #000000;
         }
 
         /* --- ESTILIZAÇÃO GERAL --- */
@@ -54,7 +51,7 @@
         header {
             background-color: var(--panel-bg);
             border-bottom: 3px solid var(--primary-color);
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,6 +61,7 @@
 
         h1 {
             color: var(--primary-color);
+            font-size: 2rem;
         }
 
         /* --- BARRA DE ACESSIBILIDADE --- */
@@ -72,139 +70,116 @@
             gap: 10px;
         }
 
-        .accessibility-menu button, .pagination button, .filter-section select {
+        .accessibility-menu button {
             background-color: var(--panel-bg);
             color: var(--text-color);
             border: 2px solid var(--primary-color);
-            padding: 8px 12px;
+            padding: 10px 16px;
             cursor: pointer;
             font-weight: bold;
             border-radius: 4px;
+            font-size: 1rem;
         }
 
-        .accessibility-menu button:focus, .pagination button:focus, .filter-section select:focus {
+        .accessibility-menu button:focus {
             outline: 3px solid var(--text-color);
         }
 
-        /* --- CONTEÚDO PRINCIPAL --- */
+        /* --- CONTEÚDO PRINCIPAL (BLOG DE CARROS) --- */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 2rem auto;
-            padding: 1rem;
+            padding: 0 1rem;
+        }
+
+        .intro-text {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        /* Grid de Cards dos Carros */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .car-card {
             background-color: var(--panel-bg);
-            border-radius: 8px;
             border: 1px solid var(--border-color);
-        }
-
-        .controls-row {
+            border-radius: 8px;
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            gap: 15px;
+            flex-direction: column;
         }
 
-        .stats {
-            font-weight: bold;
-            font-size: 1.1rem;
+        [data-theme="high-contrast"] .car-card {
+            border: 2px solid #ffffff;
         }
 
-        .filter-section select {
-            font-size: 1rem;
-            padding: 6px 12px;
-        }
-
-        /* --- TABELA COM IMAGENS --- */
-        table {
+        .car-image {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1rem;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        th {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
-        }
-
-        tr:nth-child(even) {
-            background-color: var(--table-stripe);
-        }
-
-        .car-thumb {
-            width: 100px;
-            height: 60px;
+            height: 200px;
             object-fit: cover;
+            display: block;
+        }
+
+        [data-theme="high-contrast"] .car-image {
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .car-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .car-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .car-specs {
+            margin: 1rem 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: var(--badge-bg);
+            padding: 4px 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
             border-radius: 4px;
             border: 1px solid var(--border-color);
-            display: block;
-            cursor: zoom-in;
         }
 
-        [data-theme="high-contrast"] .car-thumb {
-            border: 2px solid #ffffff;
-        }
-
-        /* --- PAGINAÇÃO --- */
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-        }
-
-        /* --- MODAL DA IMAGEM --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--modal-overlay);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 8px;
-            border: 3px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #ffffff;
-            font-size: 40px;
+        .btn-details {
+            margin-top: auto;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
             font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
             cursor: pointer;
-            background: none;
-            border: none;
         }
 
-        [data-theme="high-contrast"] .modal-close {
-            color: #ffff00;
-            background: #000000;
-            padding: 5px 15px;
-            border: 2px solid #ffffff;
+        .btn-details:focus {
+            outline: 3px solid var(--text-color);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
             border-top: 1px solid var(--border-color);
             background-color: var(--panel-bg);
         }
@@ -212,100 +187,103 @@
 </head>
 <body>
 
+    <!-- Menu de Acessibilidade -->
     <header role="banner">
-        <h1>SuperCars Database</h1>
-        <nav class="accessibility-menu" aria-label="Menu de Acessibilidade">
-            <button onclick="setTheme('light')" aria-label="Tema Claro">☀️ Claro</button>
-            <button onclick="setTheme('dark')" aria-label="Tema Escuro">🌙 Escuro</button>
-            <button onclick="setTheme('high-contrast')" aria-label="Alto Contraste">👁️ Contraste</button>
+        <h1>SuperCars Blog</h1>
+        <nav class="accessibility-menu" aria-label="Controles de Acessibilidade">
+            <button onclick="setTheme('light')" aria-label="Ativar Tema Claro">☀️ Claro</button>
+            <button onclick="setTheme('dark')" aria-label="Ativar Tema Escuro">🌙 Escuro</button>
+            <button onclick="setTheme('high-contrast')" aria-label="Ativar Alto Contraste">👁️ Contraste</button>
         </nav>
     </header>
 
     <main class="container">
         
-        <div class="controls-row">
-            <div class="stats" id="car-count">Filtrando carros esportivos...</div>
-            
-            <!-- Filtro de Marcas -->
-            <div class="filter-section">
-                <label Sver for="brand-filter" style="margin-right: 8px; font-weight: bold;">Filtrar por Marca:</label>
-                <select id="brand-filter" onchange="filterCars()">
-                    <option value="all">Todas as Marcas</option>
-                    <option value="Ferrari">Ferrari</option>
-                    <option value="Lamborghini">Lamborghini</option>
-                    <option value="Porsche">Porsche</option>
-                    <option value="McLaren">McLaren</option>
-                    <option value="Aston Martin">Aston Martin</option>
-                </select>
-            </div>
+        <div class="intro-text">
+            <p>Bem-vindo à nossa página inicial de Superesportivos. Explore os modelos mais rápidos e potentes do mercado.</p>
         </div>
-        
-        <table id="cars-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Foto (Clique p/ ampliar)</th>
-                    <th>Modelo</th>
-                    <th>Marca</th>
-                    <th>Ano</th>
-                    <th>Potência</th>
-                </tr>
-            </thead>
-            <tbody id="cars-body">
-                <!-- Inserido via JavaScript -->
-            </tbody>
-        </table>
 
-        <div class="pagination">
-            <button id="prev-btn" onclick="changePage(-1)">◀ Anterior</button>
-            <span id="page-info">Página 1</span>
-            <button id="next-btn" onclick="changePage(1)">Próxima ▶</button>
+        <!-- Grid Exibindo os Carros Diretamente na Tela Inicial -->
+        <div class="blog-grid">
+            
+            <!-- Card 1 -->
+            <article class="car-card">
+                <img src="https://unsplash.com" class="car-image" alt="Ferrari Roma vermelha estacionada">
+                <div class="car-info">
+                    <h2>Ferrari Roma</h2>
+                    <p>O equilíbrio perfeito entre elegância intemporal e a performance brutal característica de Maranello.</p>
+                    <div class="car-specs">
+                        <span class="badge">Motor V8</span>
+                        <span class="badge">620 cv</span>
+                        <span class="badge">Ano 2024</span>
+                    </div>
+                    <button class="btn-details" aria-label="Ver detalhes sobre Ferrari Roma">Ver Detalhes</button>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="car-card">
+                <img src="https://unsplash.com" class="car-image" alt="Lamborghini Aventador amarela de perfil">
+                <div class="car-info">
+                    <h2>Lamborghini Aventador</h2>
+                    <p>Um ícone de linhas agressivas equipado com o lendário motor V10 aspirado de resposta imediata.</p>
+                    <div class="car-specs">
+                        <span class="badge">Motor V10</span>
+                        <span class="badge">740 cv</span>
+                        <span class="badge">Ano 2023</span>
+                    </div>
+                    <button class="btn-details" aria-label="Ver detalhes sobre Lamborghini Aventador">Ver Detalhes</button>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="car-card">
+                <img src="https://unsplash.com" class="car-image" alt="Porsche 911 Turbo S cinza em uma estrada">
+                <div class="car-info">
+                    <h2>Porsche 911 Turbo S</h2>
+                    <p>Referência global em engenharia automotiva, entregando aceleração implacável em qualquer terreno.</p>
+                    <div class="car-specs">
+                        <span class="badge">Motor Boxer 6</span>
+                        <span class="badge">650 cv</span>
+                        <span class="badge">Ano 2024</span>
+                    </div>
+                    <button class="btn-details" aria-label="Ver detalhes sobre Porsche 911">Ver Detalhes</button>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="car-card">
+                <img src="https://unsplash.com" class="car-image" alt="McLaren 720S laranja de portas abertas">
+                <div class="car-info">
+                    <h2>McLaren 720S</h2>
+                    <p>Aerodinâmica avançada combinada com uma célula de fibra de carbono ultra leve de tecnologia de pista.</p>
+                    <div class="car-specs">
+                        <span class="badge">Motor V8 BiTurbo</span>
+                        <span class="badge">720 cv</span>
+                        <span class="badge">Ano 2023</span>
+                    </div>
+                    <button class="btn-details" aria-label="Ver detalhes sobre McLaren 720S">Ver Detalhes</button>
+                </div>
+            </article>
+
         </div>
     </main>
 
-    <!-- Modal para visualização ampliada -->
-    <div id="image-modal" class="modal" onclick="closeModal()">
-        <button class="modal-close" onclick="closeModal()" aria-label="Fechar imagem">&times;</button>
-        <img class="modal-content" id="modal-img" alt="Visualização ampliada do carro esportivo">
-    </div>
-
     <footer>
-        <p>&copy; 2026 SuperCars Dashboard - Filtros e zoom de imagens acessíveis.</p>
+        <p>&copy; 2026 SuperCars Blog - Design Inclusivo e Acessível.</p>
     </footer>
 
+    <!-- LÓGICA DE TEMAS JAVASCRIPT -->
     <script>
-        const catalogoMarcas = [
-            { marca: "Ferrari", modelo: "Roma", img: "https://unsplash.com" },
-            { marca: "Lamborghini", modelo: "Aventador", img: "https://unsplash.com" },
-            { marca: "Porsche", modelo: "911 Turbo S", img: "https://unsplash.com" },
-            { marca: "McLaren", modelo: "720S", img: "https://unsplash.com" },
-            { marca: "Aston Martin", modelo: "Vantage", img: "https://unsplash.com" }
-        ];
-
-        const todosOsCarros = [];
-        let carrosFiltrados = [];
-
-        // Gerar 2000 carros
-        for (let i = 1; i <= 2000; i++) {
-            const base = catalogoMarcas[i % catalogoMarcas.length];
-            const anoAleatorio = 2020 + (i % 7);
-            const potenciaAleatoria = 550 + (i % 300);
-
-            todosOsCarros.push({
-                id: `#${String(i).padStart(4, '0')}`,
-                marca: base.marca,
-                modelo: `${base.modelo} Spec-${i}`,
-                ano: anoAleatorio,
-                potencia: potenciaAleatoria,
-                foto: base.img
-            });
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('blog-cars-theme', themeName);
         }
 
-        // Inicializa a lista filtrada com todos os dados
-        carrosFiltrados = [...todosOsCarros];
-
-        // CONFIGURAÇÃO DE PAGINAÇÃO
-        let currentPage = 1;
-        const rowsPerPage = 10;
-
-        function displayCars() {
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('blog-cars-theme') || 'light';
+            setTheme(savedTheme);
+        };
+    </script>
+</body>
+</html>
