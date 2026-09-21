@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garagem de Carros Esportivos</title>
+    <title>Garagem de Carros Esportivos Avançada</title>
     <style>
         /* --- CONFIGURAÇÃO DE TEMAS (VARIÁVEIS CSS) --- */
         :root {
             --bg-color: #f4f4f9;
             --panel-bg: #ffffff;
             --text-color: #333333;
-            --primary-color: #d32f2f; /* Vermelho esportivo */
+            --primary-color: #d32f2f;
             --border-color: #cccccc;
             --table-stripe: #f9f9f9;
+            --modal-overlay: rgba(0, 0, 0, 0.7);
         }
 
         [data-theme="dark"] {
@@ -22,15 +23,17 @@
             --primary-color: #ff5252;
             --border-color: #444444;
             --table-stripe: #2a2a2a;
+            --modal-overlay: rgba(0, 0, 0, 0.85);
         }
 
         [data-theme="high-contrast"] {
             --bg-color: #000000;
             --panel-bg: #000000;
-            --text-color: #ffff00; /* Texto amarelo para alto contraste */
+            --text-color: #ffff00;
             --primary-color: #ffffff;
             --border-color: #ffffff;
             --table-stripe: #000000;
+            --modal-overlay: rgba(255, 255, 255, 0.2);
         }
 
         /* --- ESTILIZAÇÃO GERAL --- */
@@ -56,6 +59,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         h1 {
@@ -68,7 +72,7 @@
             gap: 10px;
         }
 
-        .accessibility-menu button, .pagination button {
+        .accessibility-menu button, .pagination button, .filter-section select {
             background-color: var(--panel-bg);
             color: var(--text-color);
             border: 2px solid var(--primary-color);
@@ -78,13 +82,13 @@
             border-radius: 4px;
         }
 
-        .accessibility-menu button:focus, .pagination button:focus {
+        .accessibility-menu button:focus, .pagination button:focus, .filter-section select:focus {
             outline: 3px solid var(--text-color);
         }
 
         /* --- CONTEÚDO PRINCIPAL --- */
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 2rem auto;
             padding: 1rem;
             background-color: var(--panel-bg);
@@ -92,13 +96,26 @@
             border: 1px solid var(--border-color);
         }
 
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            gap: 15px;
+        }
+
         .stats {
-            margin-bottom: 1rem;
             font-weight: bold;
             font-size: 1.1rem;
         }
 
-        /* --- TABELA DE CARROS ACCESSÍVEL --- */
+        .filter-section select {
+            font-size: 1rem;
+            padding: 6px 12px;
+        }
+
+        /* --- TABELA COM IMAGENS --- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -109,6 +126,7 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
         }
 
         th {
@@ -120,12 +138,67 @@
             background-color: var(--table-stripe);
         }
 
+        .car-thumb {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            display: block;
+            cursor: zoom-in;
+        }
+
+        [data-theme="high-contrast"] .car-thumb {
+            border: 2px solid #ffffff;
+        }
+
         /* --- PAGINAÇÃO --- */
         .pagination {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 1rem;
+        }
+
+        /* --- MODAL DA IMAGEM --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-overlay);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 8px;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        [data-theme="high-contrast"] .modal-close {
+            color: #ffff00;
+            background: #000000;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
         }
 
         footer {
@@ -149,17 +222,33 @@
     </header>
 
     <main class="container">
-        <div class="stats" id="car-count">Carregando catálogo de esportivos...</div>
         
-        <!-- Tabela onde os carros serão listados -->
+        <div class="controls-row">
+            <div class="stats" id="car-count">Filtrando carros esportivos...</div>
+            
+            <!-- Filtro de Marcas -->
+            <div class="filter-section">
+                <label Sver for="brand-filter" style="margin-right: 8px; font-weight: bold;">Filtrar por Marca:</label>
+                <select id="brand-filter" onchange="filterCars()">
+                    <option value="all">Todas as Marcas</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="McLaren">McLaren</option>
+                    <option value="Aston Martin">Aston Martin</option>
+                </select>
+            </div>
+        </div>
+        
         <table id="cars-table">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Foto (Clique p/ ampliar)</th>
                     <th>Modelo</th>
                     <th>Marca</th>
                     <th>Ano</th>
-                    <th>Potência (cv)</th>
+                    <th>Potência</th>
                 </tr>
             </thead>
             <tbody id="cars-body">
@@ -167,7 +256,6 @@
             </tbody>
         </table>
 
-        <!-- Controles de Paginação para não travar a tela -->
         <div class="pagination">
             <button id="prev-btn" onclick="changePage(-1)">◀ Anterior</button>
             <span id="page-info">Página 1</span>
@@ -175,81 +263,49 @@
         </div>
     </main>
 
+    <!-- Modal para visualização ampliada -->
+    <div id="image-modal" class="modal" onclick="closeModal()">
+        <button class="modal-close" onclick="closeModal()" aria-label="Fechar imagem">&times;</button>
+        <img class="modal-content" id="modal-img" alt="Visualização ampliada do carro esportivo">
+    </div>
+
     <footer>
-        <p>&copy; 2026 SuperCars Dashboard - Acessibilidade em conformidade com WCAG.</p>
+        <p>&copy; 2026 SuperCars Dashboard - Filtros e zoom de imagens acessíveis.</p>
     </footer>
 
     <script>
-        // 1. GERADOR DE DADOS (Simulando 2000 carros esportivos)
-        const marcas = ["Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston Martin", "Bugatti", "Audi", "BMW"];
-        const modelos = ["Roma", "Aventador", "911 Turbo S", "720S", "Vantage", "Chiron", "R8 V10", "M8 Competition"];
-        const carros = [];
+        const catalogoMarcas = [
+            { marca: "Ferrari", modelo: "Roma", img: "https://unsplash.com" },
+            { marca: "Lamborghini", modelo: "Aventador", img: "https://unsplash.com" },
+            { marca: "Porsche", modelo: "911 Turbo S", img: "https://unsplash.com" },
+            { marca: "McLaren", modelo: "720S", img: "https://unsplash.com" },
+            { marca: "Aston Martin", modelo: "Vantage", img: "https://unsplash.com" }
+        ];
 
+        const todosOsCarros = [];
+        let carrosFiltrados = [];
+
+        // Gerar 2000 carros
         for (let i = 1; i <= 2000; i++) {
-            const marcaAleatoria = marcas[i % marcas.length];
-            const modeloAleatorio = modelos[i % modelos.length];
-            const anoAleatorio = 2020 + (i % 7); // Anos entre 2020 e 2026
-            const potenciaAleatoria = 500 + (i % 500); // Cavalos entre 500cv e 1000cv
+            const base = catalogoMarcas[i % catalogoMarcas.length];
+            const anoAleatorio = 2020 + (i % 7);
+            const potenciaAleatoria = 550 + (i % 300);
 
-            carros.push({
+            todosOsCarros.push({
                 id: `#${String(i).padStart(4, '0')}`,
-                marca: marcaAleatoria,
-                modelo: `${modeloAleatorio} GT-${i}`,
+                marca: base.marca,
+                modelo: `${base.modelo} Spec-${i}`,
                 ano: anoAleatorio,
-                potencia: potenciaAleatoria
+                potencia: potenciaAleatoria,
+                foto: base.img
             });
         }
 
-        // 2. LÓGICA DE PAGINAÇÃO
+        // Inicializa a lista filtrada com todos os dados
+        carrosFiltrados = [...todosOsCarros];
+
+        // CONFIGURAÇÃO DE PAGINAÇÃO
         let currentPage = 1;
-        const rowsPerPage = 15; // Exibe 15 carros por vez para manter a leitura limpa
+        const rowsPerPage = 10;
 
         function displayCars() {
-            const tbody = document.getElementById('cars-body');
-            tbody.innerHTML = "";
-
-            const start = (currentPage - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedCars = carros.slice(start, end);
-
-            paginatedCars.forEach(car => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${car.id}</strong></td>
-                    <td>${car.modelo}</td>
-                    <td>${car.marca}</td>
-                    <td>${car.ano}</td>
-                    <td>${car.potencia} cv</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            // Atualiza os textos da tela
-            document.getElementById('car-count').innerText = `Total de Carros Esportivos Cadastrados: ${carros.length}`;
-            document.getElementById('page-info').innerText = `Página ${currentPage} de ${Math.ceil(carros.length / rowsPerPage)}`;
-            
-            // Bloqueia botões se chegar nas pontas
-            document.getElementById('prev-btn').disabled = currentPage === 1;
-            document.getElementById('next-btn').disabled = end >= carros.length;
-        }
-
-        function changePage(direction) {
-            currentPage += direction;
-            displayCars();
-        }
-
-        // 3. ALTERNADOR DE TEMAS ACESSÍVEIS
-        function setTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('cars-theme', themeName);
-        }
-
-        // Inicialização automática
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('cars-theme') || 'light';
-            setTheme(savedTheme);
-            displayCars();
-        };
-    </script>
-</body>
-</html>
