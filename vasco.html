@@ -1,379 +1,255 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoSport - Blog de Carros Esportivos</title>
-  <style>
-    :root {
-      /* Tema Escuro Padrão */
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --text-color: #ffffff;
-      --accent-color: #e50914;
-      --subtext-color: #aaa;
-      --border-color: #333;
-      --font-scale: 1;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garagem de Carros Esportivos</title>
+    <style>
+        /* --- CONFIGURAÇÃO DE TEMAS (VARIÁVEIS CSS) --- */
+        :root {
+            --bg-color: #f4f4f9;
+            --panel-bg: #ffffff;
+            --text-color: #333333;
+            --primary-color: #d32f2f; /* Vermelho esportivo */
+            --border-color: #cccccc;
+            --table-stripe: #f9f9f9;
+        }
 
-    /* Novo Tema Claro */
-    body.light-theme {
-      --bg-color: #f5f5f5;
-      --card-bg: #ffffff;
-      --text-color: #121212;
-      --subtext-color: #555555;
-      --border-color: #cccccc;
-    }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --panel-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #ff5252;
+            --border-color: #444444;
+            --table-stripe: #2a2a2a;
+        }
 
-    /* Alto Contraste (Sempre tem prioridade) */
-    body.high-contrast {
-      --bg-color: #000000;
-      --card-bg: #000000;
-      --text-color: #ffff00;
-      --accent-color: #ffff00;
-      --subtext-color: #ffffff;
-      --border-color: #ffff00;
-    }
+        [data-theme="high-contrast"] {
+            --bg-color: #000000;
+            --panel-bg: #000000;
+            --text-color: #ffff00; /* Texto amarelo para alto contraste */
+            --primary-color: #ffffff;
+            --border-color: #ffffff;
+            --table-stripe: #000000;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        /* --- ESTILIZAÇÃO GERAL --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.2s, color 0.2s;
+        }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      padding-bottom: 40px;
-      font-size: calc(16px * var(--font-scale));
-      transition: background-color 0.3s, color 0.3s;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    /* Barra de Acessibilidade */
-    .accessibility-bar {
-      background-color: #0d0d0d;
-      border-bottom: 1px solid var(--border-color);
-      padding: 8px 16px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+        header {
+            background-color: var(--panel-bg);
+            border-bottom: 3px solid var(--primary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    /* Garante que a barra continue legível no tema claro */
-    body.light-theme .accessibility-bar {
-      background-color: #e0e0e0;
-    }
-    body.high-contrast .accessibility-bar {
-      background-color: #000000;
-    }
+        h1 {
+            color: var(--primary-color);
+        }
 
-    .accessibility-btn {
-      background: #2a2a2a;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: background-color 0.2s, color 0.2s;
-    }
+        /* --- BARRA DE ACESSIBILIDADE --- */
+        .accessibility-menu {
+            display: flex;
+            gap: 10px;
+        }
 
-    body.light-theme .accessibility-btn {
-      background: #ffffff;
-      color: #333;
-      border: 1px solid #bbb;
-    }
+        .accessibility-menu button, .pagination button {
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
 
-    .accessibility-btn:hover {
-      background-color: var(--accent-color);
-      color: #000;
-    }
-    
-    body.light-theme .accessibility-btn:hover {
-      background-color: var(--accent-color);
-      color: #fff;
-    }
+        .accessibility-menu button:focus, .pagination button:focus {
+            outline: 3px solid var(--text-color);
+        }
 
-    header {
-      background-color: var(--card-bg);
-      text-align: center;
-      padding: 2rem 1rem;
-      border-bottom: 3px solid var(--accent-color);
-      transition: background-color 0.3s;
-    }
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
 
-    header h1 {
-      font-size: calc(2.5rem * var(--font-scale));
-      color: var(--accent-color);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+        .stats {
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
 
-    header p {
-      color: var(--subtext-color);
-      margin-top: 5px;
-    }
+        /* --- TABELA DE CARROS ACCESSÍVEL --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
 
-    /* Painel de Controle */
-    .controls-container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    .search-input {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px 20px;
-      border-radius: 25px;
-      border: 1px solid var(--border-color);
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      font-size: 1rem;
-      outline: none;
-      transition: background-color 0.3s, color 0.3s;
-    }
+        th {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
 
-    .search-input:focus {
-      border-color: var(--accent-color);
-    }
+        tr:nth-child(even) {
+            background-color: var(--table-stripe);
+        }
 
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+        /* --- PAGINAÇÃO --- */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
 
-    .filter-btn {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background-color: var(--accent-color);
-      border-color: var(--accent-color);
-      color: #fff;
-    }
-
-    body.high-contrast .filter-btn.active {
-      color: #000;
-    }
-
-    .results-count {
-      color: var(--subtext-color);
-      font-size: 0.9rem;
-    }
-
-    /* Galeria */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 20px auto 0;
-      padding: 0 20px;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .card-tag {
-      display: inline-block;
-      align-self: flex-start;
-      background-color: #2a2a2a;
-      color: var(--accent-color);
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    
-    body.light-theme .card-tag {
-      background-color: #e0e0e0;
-    }
-
-    .card-title {
-      font-size: calc(1.25rem * var(--font-scale));
-      margin-bottom: 8px;
-      color: var(--text-color);
-    }
-
-    .card-specs {
-      font-size: calc(0.9rem * var(--font-scale));
-      color: var(--subtext-color);
-      margin-bottom: 15px;
-      line-height: 1.4;
-      flex-grow: 1;
-    }
-
-    .card-btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background-color: var(--accent-color);
-      color: #fff;
-      padding: 10px 0;
-      border-radius: 5px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .card-btn:hover {
-      background-color: #b20710;
-    }
-
-    body.high-contrast .card-btn {
-      color: #000;
-    }
-
-    /* Modal de Detalhes */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      max-width: 500px;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .modal-content img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      border: none;
-      font-size: 1.5rem;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10;
-    }
-  </style>
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--panel-bg);
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Barra Superior de Acessibilidade -->
-  <nav class="accessibility-bar" aria-label="Menu de Acessibilidade">
-    <button class="accessibility-btn" onclick="alterarFonte(0.1)" title="Aumentar Fonte">A+</button>
-    <button class="accessibility-btn" onclick="alterarFonte(-0.1)" title="Diminuir Fonte">A-</button>
-    <button class="accessibility-btn" onclick="resetarFonte()" title="Tamanho Padrão">A (Padrão)</button>
-    <button class="accessibility-btn" id="themeToggleBtn" onclick="toggleTema()" title="Alternar Tema Claro/Escuro">☀️ Modo Claro</button>
-    <button class="accessibility-btn" onclick="toggleAltoContraste()" title="Alternar Alto Contraste">Alto Contraste</button>
-    <button class="accessibility-btn" onclick="lerPagina()" title="Ouvir Conteúdo">🔊 Leitor de Voz</button>
-  </nav>
+    <header role="banner">
+        <h1>SuperCars Database</h1>
+        <nav class="accessibility-menu" aria-label="Menu de Acessibilidade">
+            <button onclick="setTheme('light')" aria-label="Tema Claro">☀️ Claro</button>
+            <button onclick="setTheme('dark')" aria-label="Tema Escuro">🌙 Escuro</button>
+            <button onclick="setTheme('high-contrast')" aria-label="Alto Contraste">👁️ Contraste</button>
+        </nav>
+    </header>
 
-  <header>
-    <h1>AutoSport Blog</h1>
-    <p>A coleção definitiva dos carros esportivos mais incríveis do mundo</p>
-  </header>
+    <main class="container">
+        <div class="stats" id="car-count">Carregando catálogo de esportivos...</div>
+        
+        <!-- Tabela onde os carros serão listados -->
+        <table id="cars-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Ano</th>
+                    <th>Potência (cv)</th>
+                </tr>
+            </thead>
+            <tbody id="cars-body">
+                <!-- Inserido via JavaScript -->
+            </tbody>
+        </table>
 
-  <div class="controls-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Buscar modelo de carro..." oninput="filtrarGeral()">
-    
-    <div class="filter-buttons">
-      <button class="filter-btn active" onclick="filtrarCategoria('todas', this)">Todas</button>
-      <button class="filter-btn" onclick="filtrarCategoria('Superesportivo', this)">Superesportivos</button>
-      <button class="filter-btn" onclick="filtrarCategoria('Muscle Car', this)">Muscle Cars</button>
-      <button class="filter-btn" onclick="filtrarCategoria('JDM', this)">JDM</button>
-    </div>
+        <!-- Controles de Paginação para não travar a tela -->
+        <div class="pagination">
+            <button id="prev-btn" onclick="changePage(-1)">◀ Anterior</button>
+            <span id="page-info">Página 1</span>
+            <button id="next-btn" onclick="changePage(1)">Próxima ▶</button>
+        </div>
+    </main>
 
-    <div class="results-count" id="resultsCount">Exibindo 0 de 0 carros</div>
-  </div>
+    <footer>
+        <p>&copy; 2026 SuperCars Dashboard - Acessibilidade em conformidade com WCAG.</p>
+    </footer>
 
-  <main class="gallery" id="carGallery"></main>
+    <script>
+        // 1. GERADOR DE DADOS (Simulando 2000 carros esportivos)
+        const marcas = ["Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston Martin", "Bugatti", "Audi", "BMW"];
+        const modelos = ["Roma", "Aventador", "911 Turbo S", "720S", "Vantage", "Chiron", "R8 V10", "M8 Competition"];
+        const carros = [];
 
-  <!-- Janela Modal de Interação -->
-  <div class="modal-overlay" id="carModal" onclick="fecharModal(event)">
-    <div class="modal-content">
-      <button class="modal-close" onclick="fecharModalForcado()">&times;</button>
-      <img id="modalImg" src="" alt="">
-      <div class="modal-body">
-        <span class="card-tag" id="modalTag"></span>
-        <h2 class="card-title" id="modalTitle"></h2>
-        <p class="card-specs" id="modalSpecs"></p>
-        <p style="color: var(--subtext-color); margin-top: 10px;">
-          Este modelo faz parte da coleção oficial do AutoSport Blog. Entre em contato com nossos editores para obter a ficha técnica completa e materiais exclusivos de alta resolução.
-        </p>
-      </div>
-    </div>
-  </div>
+        for (let i = 1; i <= 2000; i++) {
+            const marcaAleatoria = marcas[i % marcas.length];
+            const modeloAleatorio = modelos[i % modelos.length];
+            const anoAleatorio = 2020 + (i % 7); // Anos entre 2020 e 2026
+            const potenciaAleatoria = 500 + (i % 500); // Cavalos entre 500cv e 1000cv
 
-  <script>
-    // Banco de dados interno
-    const carros = [
+            carros.push({
+                id: `#${String(i).padStart(4, '0')}`,
+                marca: marcaAleatoria,
+                modelo: `${modeloAleatorio} GT-${i}`,
+                ano: anoAleatorio,
+                potencia: potenciaAleatoria
+            });
+        }
+
+        // 2. LÓGICA DE PAGINAÇÃO
+        let currentPage = 1;
+        const rowsPerPage = 15; // Exibe 15 carros por vez para manter a leitura limpa
+
+        function displayCars() {
+            const tbody = document.getElementById('cars-body');
+            tbody.innerHTML = "";
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedCars = carros.slice(start, end);
+
+            paginatedCars.forEach(car => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${car.id}</strong></td>
+                    <td>${car.modelo}</td>
+                    <td>${car.marca}</td>
+                    <td>${car.ano}</td>
+                    <td>${car.potencia} cv</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Atualiza os textos da tela
+            document.getElementById('car-count').innerText = `Total de Carros Esportivos Cadastrados: ${carros.length}`;
+            document.getElementById('page-info').innerText = `Página ${currentPage} de ${Math.ceil(carros.length / rowsPerPage)}`;
+            
+            // Bloqueia botões se chegar nas pontas
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = end >= carros.length;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            displayCars();
+        }
+
+        // 3. ALTERNADOR DE TEMAS ACESSÍVEIS
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('cars-theme', themeName);
+        }
+
+        // Inicialização automática
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('cars-theme') || 'light';
+            setTheme(savedTheme);
+            displayCars();
+        };
+    </script>
+</body>
+</html>
