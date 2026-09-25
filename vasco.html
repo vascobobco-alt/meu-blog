@@ -1,5 +1,4 @@
-<!DOCTYPE h
-tml>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -99,7 +98,7 @@ tml>
         .movie-poster {
             width: 100%;
             height: 350px;
-            background-color: #333;
+            background-color: #2a2a36;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -240,52 +239,61 @@ tml>
     </div>
 
     <script>
-        // Dados dos filmes mais assistidos e populares de 2026
+        // Lista de filmes cadastrados
         const movies = [
             {
-                title: "A Odisseia",
+                title: "Homem-Aranha: Através do Aranhaverso",
+                director: "Joaquim Dos Santos, Kemp Powers",
+                genre: "Animação / Ação",
+                rating: "8.7",
+                year: "2023",
+                synopsis: "Miles Morales é catapultado através do Multiverso, onde ele encontra uma equipe de Pessoas-Aranha encarregadas de proteger sua própria existência.",
+                cast: "Shameik Moore, Hailee Steinfeld, Oscar Isaac"
+            },
+            {
+                title: "Oppenheimer",
                 director: "Christopher Nolan",
-                genre: "Épico / Ação",
-                rating: "8.3",
-                year: "2026",
-                synopsis: "Odisséia, o lendário rei grego de Ítaca, embarca em uma perigosa viagem de dez anos para retornar à sua pátria após o fim da Guerra de Troia, enfrentando a fúria de deuses e monstros mitológicos.",
-                cast: "Matt Damon, Tom Holland, Anne Hathaway, Robert Pattinson"
+                genre: "Biografia / Drama",
+                rating: "8.9",
+                year: "2023",
+                synopsis: "A história do físico americano J. Robert Oppenheimer, seu papel no Projeto Manhattan e o desenvolvimento da bomba atômica.",
+                cast: "Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr."
             },
             {
-                title: "Resident Evil (2026)",
-                director: "Diretor de Produção",
-                genre: "Terror / Ação",
-                rating: "7.7",
-                year: "2026",
-                synopsis: "O mais recente capítulo da aclamada franquia de sobrevivência e ficção científica que dominou as bilheterias com uma atmosfera intensa e muita ação.",
-                cast: "Elenco de Ação 2026"
+                title: "Interstellar",
+                director: "Christopher Nolan",
+                genre: "Ficção Científica / Aventura",
+                rating: "8.7",
+                year: "2014",
+                synopsis: "Uma equipe de exploradores viaja através de um buraco de minhoca no espaço na tentativa de garantir a sobrevivência da humanidade.",
+                cast: "Matthew McConaughey, Anne Hathaway, Jessica Chastain"
             },
             {
-                title: "O Fim da Rua (The End of Oak Street)",
-                director: "David Robert Mitchell",
-                genre: "Ficção Científica / Sobrevivência",
-                rating: "6.3",
-                year: "2026",
-                synopsis: "Um misterioso evento cósmico arranca uma rua inteira do subúrbio e a transporta para um local completamente desconhecido. A família Platt precisa se unir para sobreviver em uma realidade alienígena.",
-                cast: "Anne Hathaway, Ewan McGregor, Maisy Stella"
+                title: "Batman: O Cavaleiro das Trevas",
+                director: "Christopher Nolan",
+                genre: "Ação / Crime",
+                rating: "9.0",
+                year: "2008",
+                synopsis: "Quando a ameaça conhecida como Coringa causa estragos em Gotham, Batman deve aceitar um dos maiores testes psicológicos e físicos para combater a injustiça.",
+                cast: "Christian Bale, Heath Ledger, Aaron Eckhart"
             },
             {
-                title: "O Homem que Sussurra (The Whisper Man)",
-                director: "Thriller Team",
-                genre: "Suspense / Policial",
-                rating: "6.2",
-                year: "2026",
-                synopsis: "Sucesso estrondoso nos streamings, este suspense acompanha um pai abalado pelo desaparecimento de seu filho e a possibilidade de que o crime tenha sido cometido por um infame serial killer.",
-                cast: "Robert De Niro, Adam Scott, Michelle Monaghan"
+                title: "Duna: Parte 2",
+                director: "Denis Villeneuve",
+                genre: "Ficção Científica / Aventura",
+                rating: "8.6",
+                year: "2024",
+                synopsis: "Paul Atreides se une a Chani e aos Fremen enquanto busca vingança contra os conspiradores que destruíram sua família.",
+                cast: "Timothée Chalamet, Zendaya, Rebecca Ferguson"
             },
             {
-                title: "The Super Mario Galaxy Movie",
-                director: "Aaron Horvath / Michael Jelenic",
-                genre: "Animação / Aventura",
-                rating: "8.3",
-                year: "2026",
-                synopsis: "Primeiro filme do ano a cruzar a barreira de 1 bilhão de dólares. Mario, Luigi e a Princesa Peach viajam pelo espaço sideral para resgatar a princesa cósmica Rosalina das garras de uma nova ameaça.",
-                cast: "Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black"
+                title: "Matrix",
+                director: "Lana Wachowski, Lilly Wachowski",
+                genre: "Ficção Científica / Ação",
+                rating: "8.7",
+                year: "1999",
+                synopsis: "Um jovem hacker descobre a verdade sobre a sua realidade e o seu papel na guerra contra seus controladores virtuais.",
+                cast: "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss"
             }
         ];
 
@@ -307,4 +315,63 @@ tml>
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
                 
+                card.innerHTML = `
+                    <div class="movie-poster">
+                        <span>${movie.title}</span>
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">${movie.title}</h3>
+                        <div class="movie-meta">
+                            <span>${movie.year} • ${movie.genre}</span>
+                            <span class="rating">★ ${movie.rating}</span>
+                        </div>
+                    </div>
+                `;
+
                 // Abre o modal ao clicar no card
+                card.addEventListener('click', () => openModal(movie));
+                movieGrid.appendChild(card);
+            });
+        }
+
+        // Abrir modal com detalhes do filme
+        function openModal(movie) {
+            document.getElementById('modalTitle').textContent = movie.title;
+            document.getElementById('modalSynopsis').textContent = movie.synopsis;
+            document.getElementById('modalDetails').innerHTML = `
+                <p><strong>Direção:</strong> ${movie.director}</p>
+                <p><strong>Elenco:</strong> ${movie.cast}</p>
+                <p><strong>Gênero:</strong> ${movie.genre}</p>
+                <p><strong>Ano de Lançamento:</strong> ${movie.year}</p>
+                <p><strong>Avaliação:</strong> ★ ${movie.rating} / 10</p>
+            `;
+            modal.classList.add('show');
+        }
+
+        // Fechar modal
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        // Filtrar filmes pelo campo de busca
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredMovies = movies.filter(movie => 
+                movie.title.toLowerCase().includes(searchTerm) ||
+                movie.genre.toLowerCase().includes(searchTerm) ||
+                movie.director.toLowerCase().includes(searchTerm)
+            );
+            displayMovies(filteredMovies);
+        });
+
+        // Inicializar exibição
+        displayMovies(movies);
+    </script>
+</body>
+</html>
