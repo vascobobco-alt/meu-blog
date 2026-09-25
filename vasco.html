@@ -1,289 +1,310 @@
-<!DOCTYPE html>
+<!DOCTYPE h
+tml>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperCars Blog - Página Inicial</title>
+    <title>Cantinho do Cinema</title>
     <style>
-        /* --- CONFIGURAÇÃO DE TEMAS (VARIÁVEIS CSS) --- */
         :root {
-            --bg-color: #f4f4f9;
-            --panel-bg: #ffffff;
-            --text-color: #333333;
-            --primary-color: #d32f2f; /* Vermelho Esportivo */
-            --border-color: #cccccc;
-            --badge-bg: #e0e0e0;
+            --bg-color: #0f0f13;
+            --card-bg: #1c1c24;
+            --primary-color: #ff3838;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
         }
 
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --panel-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --primary-color: #ff5252;
-            --border-color: #444444;
-            --badge-bg: #333333;
-        }
-
-        [data-theme="high-contrast"] {
-            --bg-color: #000000;
-            --panel-bg: #000000;
-            --text-color: #ffff00; /* Texto amarelo para máximo contraste */
-            --primary-color: #ffffff;
-            --border-color: #ffffff;
-            --badge-bg: #000000;
-        }
-
-        /* --- ESTILIZAÇÃO GERAL --- */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            transition: background-color 0.2s, color 0.2s;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            padding-bottom: 50px;
         }
 
         header {
-            background-color: var(--panel-bg);
-            border-bottom: 3px solid var(--primary-color);
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 2rem;
-        }
-
-        /* --- BARRA DE ACESSIBILIDADE --- */
-        .accessibility-menu {
-            display: flex;
-            gap: 10px;
-        }
-
-        .accessibility-menu button {
-            background-color: var(--panel-bg);
+        header h1 {
+            font-size: 2.5rem;
             color: var(--text-color);
-            border: 2px solid var(--primary-color);
-            padding: 10px 16px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            margin: 20px auto;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #333;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
             font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
         }
 
-        .accessibility-menu button:focus {
-            outline: 3px solid var(--text-color);
+        .search-container input:focus {
+            border-color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.15);
         }
 
-        /* --- CONTEÚDO PRINCIPAL (BLOG DE CARROS) --- */
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .intro-text {
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
-        }
-
-        /* Grid de Cards dos Carros */
-        .blog-grid {
+        .movie-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
         }
 
-        .car-card {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+        .movie-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        [data-theme="high-contrast"] .car-card {
-            border: 2px solid #ffffff;
-        }
-
-        .car-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-
-        [data-theme="high-contrast"] .car-image {
-            border-bottom: 2px solid #ffffff;
-        }
-
-        .car-info {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .car-info h2 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .car-specs {
-            margin: 1rem 0;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background-color: var(--badge-bg);
-            padding: 4px 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-details {
-            margin-top: auto;
-            background-color: var(--primary-color);
-            color: var(--bg-color);
-            border: 2px solid var(--border-color);
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
 
-        .btn-details:focus {
-            outline: 3px solid var(--text-color);
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(255, 56, 56, 0.2);
         }
 
-        footer {
+        .movie-poster {
+            width: 100%;
+            height: 350px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--text-secondary);
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid var(--border-color);
-            background-color: var(--panel-bg);
+            padding: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .movie-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .movie-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .movie-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .rating {
+            color: #ffb830;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-synopsis {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-details {
+            font-size: 0.95rem;
+        }
+
+        .modal-details p {
+            margin-bottom: 8px;
+        }
+
+        .modal-details strong {
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- Menu de Acessibilidade -->
-    <header role="banner">
-        <h1>SuperCars Blog</h1>
-        <nav class="accessibility-menu" aria-label="Controles de Acessibilidade">
-            <button onclick="setTheme('light')" aria-label="Ativar Tema Claro">☀️ Claro</button>
-            <button onclick="setTheme('dark')" aria-label="Ativar Tema Escuro">🌙 Escuro</button>
-            <button onclick="setTheme('high-contrast')" aria-label="Ativar Alto Contraste">👁️ Contraste</button>
-        </nav>
+    <header>
+        <h1>Cantinho do <span>Cinema</span></h1>
+        <p>Os filmes mais assistidos e populares do momento</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar filme...">
+        </div>
     </header>
 
-    <main class="container">
-        
-        <div class="intro-text">
-            <p>Bem-vindo à nossa página inicial de Superesportivos. Explore os modelos mais rápidos e potentes do mercado.</p>
+    <div class="container">
+        <div class="movie-grid" id="movieGrid">
+            <!-- Os filmes serão injetados aqui via JavaScript -->
         </div>
+    </div>
 
-        <!-- Grid Exibindo os Carros Diretamente na Tela Inicial -->
-        <div class="blog-grid">
-            
-            <!-- Card 1 -->
-            <article class="car-card">
-                <img src="https://unsplash.com" class="car-image" alt="Ferrari Roma vermelha estacionada">
-                <div class="car-info">
-                    <h2>Ferrari Roma</h2>
-                    <p>O equilíbrio perfeito entre elegância intemporal e a performance brutal característica de Maranello.</p>
-                    <div class="car-specs">
-                        <span class="badge">Motor V8</span>
-                        <span class="badge">620 cv</span>
-                        <span class="badge">Ano 2024</span>
-                    </div>
-                    <button class="btn-details" aria-label="Ver detalhes sobre Ferrari Roma">Ver Detalhes</button>
-                </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="car-card">
-                <img src="https://unsplash.com" class="car-image" alt="Lamborghini Aventador amarela de perfil">
-                <div class="car-info">
-                    <h2>Lamborghini Aventador</h2>
-                    <p>Um ícone de linhas agressivas equipado com o lendário motor V10 aspirado de resposta imediata.</p>
-                    <div class="car-specs">
-                        <span class="badge">Motor V10</span>
-                        <span class="badge">740 cv</span>
-                        <span class="badge">Ano 2023</span>
-                    </div>
-                    <button class="btn-details" aria-label="Ver detalhes sobre Lamborghini Aventador">Ver Detalhes</button>
-                </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="car-card">
-                <img src="https://unsplash.com" class="car-image" alt="Porsche 911 Turbo S cinza em uma estrada">
-                <div class="car-info">
-                    <h2>Porsche 911 Turbo S</h2>
-                    <p>Referência global em engenharia automotiva, entregando aceleração implacável em qualquer terreno.</p>
-                    <div class="car-specs">
-                        <span class="badge">Motor Boxer 6</span>
-                        <span class="badge">650 cv</span>
-                        <span class="badge">Ano 2024</span>
-                    </div>
-                    <button class="btn-details" aria-label="Ver detalhes sobre Porsche 911">Ver Detalhes</button>
-                </div>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="car-card">
-                <img src="https://unsplash.com" class="car-image" alt="McLaren 720S laranja de portas abertas">
-                <div class="car-info">
-                    <h2>McLaren 720S</h2>
-                    <p>Aerodinâmica avançada combinada com uma célula de fibra de carbono ultra leve de tecnologia de pista.</p>
-                    <div class="car-specs">
-                        <span class="badge">Motor V8 BiTurbo</span>
-                        <span class="badge">720 cv</span>
-                        <span class="badge">Ano 2023</span>
-                    </div>
-                    <button class="btn-details" aria-label="Ver detalhes sobre McLaren 720S">Ver Detalhes</button>
-                </div>
-            </article>
-
+    <!-- Estrutura do Modal -->
+    <div class="modal" id="movieModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 class="modal-title" id="modalTitle">Título do Filme</h2>
+            <p class="modal-synopsis" id="modalSynopsis">Sinopse aqui...</p>
+            <div class="modal-details" id="modalDetails">
+                <!-- Detalhes dinâmicos -->
+            </div>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 SuperCars Blog - Design Inclusivo e Acessível.</p>
-    </footer>
-
-    <!-- LÓGICA DE TEMAS JAVASCRIPT -->
     <script>
-        function setTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('blog-cars-theme', themeName);
-        }
+        // Dados dos filmes mais assistidos e populares de 2026
+        const movies = [
+            {
+                title: "A Odisseia",
+                director: "Christopher Nolan",
+                genre: "Épico / Ação",
+                rating: "8.3",
+                year: "2026",
+                synopsis: "Odisséia, o lendário rei grego de Ítaca, embarca em uma perigosa viagem de dez anos para retornar à sua pátria após o fim da Guerra de Troia, enfrentando a fúria de deuses e monstros mitológicos.",
+                cast: "Matt Damon, Tom Holland, Anne Hathaway, Robert Pattinson"
+            },
+            {
+                title: "Resident Evil (2026)",
+                director: "Diretor de Produção",
+                genre: "Terror / Ação",
+                rating: "7.7",
+                year: "2026",
+                synopsis: "O mais recente capítulo da aclamada franquia de sobrevivência e ficção científica que dominou as bilheterias com uma atmosfera intensa e muita ação.",
+                cast: "Elenco de Ação 2026"
+            },
+            {
+                title: "O Fim da Rua (The End of Oak Street)",
+                director: "David Robert Mitchell",
+                genre: "Ficção Científica / Sobrevivência",
+                rating: "6.3",
+                year: "2026",
+                synopsis: "Um misterioso evento cósmico arranca uma rua inteira do subúrbio e a transporta para um local completamente desconhecido. A família Platt precisa se unir para sobreviver em uma realidade alienígena.",
+                cast: "Anne Hathaway, Ewan McGregor, Maisy Stella"
+            },
+            {
+                title: "O Homem que Sussurra (The Whisper Man)",
+                director: "Thriller Team",
+                genre: "Suspense / Policial",
+                rating: "6.2",
+                year: "2026",
+                synopsis: "Sucesso estrondoso nos streamings, este suspense acompanha um pai abalado pelo desaparecimento de seu filho e a possibilidade de que o crime tenha sido cometido por um infame serial killer.",
+                cast: "Robert De Niro, Adam Scott, Michelle Monaghan"
+            },
+            {
+                title: "The Super Mario Galaxy Movie",
+                director: "Aaron Horvath / Michael Jelenic",
+                genre: "Animação / Aventura",
+                rating: "8.3",
+                year: "2026",
+                synopsis: "Primeiro filme do ano a cruzar a barreira de 1 bilhão de dólares. Mario, Luigi e a Princesa Peach viajam pelo espaço sideral para resgatar a princesa cósmica Rosalina das garras de uma nova ameaça.",
+                cast: "Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black"
+            }
+        ];
 
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('blog-cars-theme') || 'light';
-            setTheme(savedTheme);
-        };
-    </script>
-</body>
-</html>
+        const movieGrid = document.getElementById('movieGrid');
+        const searchInput = document.getElementById('searchInput');
+        const modal = document.getElementById('movieModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Função para renderizar os filmes na tela
+        function displayMovies(moviesToRender) {
+            movieGrid.innerHTML = "";
+            
+            if(moviesToRender.length === 0) {
+                movieGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">Nenhum filme encontrado.</p>`;
+                return;
+            }
+
+            moviesToRender.forEach(movie => {
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                
+                // Abre o modal ao clicar no card
